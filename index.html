@@ -548,5 +548,44 @@ class Component extends DCLogic {
   }
 }
 </script>
+<!-- Lluvia de corazones -->
+<style>
+#hearts-rain{position:fixed;inset:0;pointer-events:none;z-index:60;overflow:hidden}
+#hearts-rain .h{position:absolute;top:-40px;line-height:1;will-change:transform,opacity;animation:hFall linear forwards}
+#hearts-rain .h span{display:inline-block;animation:hSway ease-in-out infinite alternate}
+@keyframes hFall{0%{transform:translateY(0) rotate(0);opacity:0}8%{opacity:var(--o)}85%{opacity:var(--o)}100%{transform:translateY(calc(100vh + 60px)) rotate(var(--r));opacity:0}}
+@keyframes hSway{from{transform:translateX(calc(var(--s) * -1))}to{transform:translateX(var(--s))}}
+</style>
+<script>
+(function(){
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var box = document.createElement('div'); box.id = 'hearts-rain'; document.body.appendChild(box);
+  var colors = ['#e8a0a8','#d97a88','#b8955a','#d9bd86','#f3c6cc','#a8323f'];
+  var glyphs = ['♥','❤︎','♡'];
+  function heart(){
+    var h = document.createElement('div'); h.className = 'h';
+    var size = 10 + Math.random()*16, dur = 6 + Math.random()*6;
+    h.style.left = (Math.random()*100) + 'vw';
+    h.style.fontSize = size + 'px';
+    h.style.color = colors[Math.floor(Math.random()*colors.length)];
+    h.style.animationDuration = dur + 's';
+    h.style.setProperty('--o', (0.55 + Math.random()*0.4).toFixed(2));
+    h.style.setProperty('--r', (Math.random()*120-60).toFixed(0) + 'deg');
+    var s = document.createElement('span');
+    s.textContent = glyphs[Math.floor(Math.random()*glyphs.length)];
+    s.style.setProperty('--s', (8 + Math.random()*18).toFixed(0) + 'px');
+    s.style.animationDuration = (1.5 + Math.random()*2) + 's';
+    h.appendChild(s); box.appendChild(h);
+    setTimeout(function(){ h.remove(); }, dur*1000 + 200);
+  }
+  // lluvia suave y constante
+  setInterval(function(){ if (!document.hidden && box.childElementCount < 28) heart(); }, 650);
+  // ráfaga al abrir el sobre (primer toque)
+  document.addEventListener('click', function burst(){
+    for (var i = 0; i < 26; i++) setTimeout(heart, i*70);
+    document.removeEventListener('click', burst);
+  });
+})();
+</script>
 </body>
 </html>
