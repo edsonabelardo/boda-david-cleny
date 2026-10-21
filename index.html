@@ -10,6 +10,7 @@
 <helmet>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#4a121c">
+<meta name="ext-resource-dependency" content="./music/cancion.mp3" data-resource-id="song">
 <meta name="ext-resource-dependency" content="./img/hero3.jpg" data-resource-id="g0">
 <meta name="ext-resource-dependency" content="./img/p04.jpg" data-resource-id="g1">
 <meta name="ext-resource-dependency" content="./img/p05.jpg" data-resource-id="g2">
@@ -41,6 +42,7 @@ a:hover{color:#4a121c}
 @keyframes dcPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.06);opacity:.85}}
 @keyframes dcFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
 @keyframes dcFall{0%{transform:translate3d(0,-8vh,0) rotate(0deg);opacity:0}10%{opacity:var(--o)}50%{transform:translate3d(var(--dx),50vh,0) rotate(var(--r))}90%{opacity:var(--o)}100%{transform:translate3d(0,108vh,0) rotate(calc(var(--r) * -1));opacity:0}}
+@keyframes dcEq{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
 @keyframes dcBeat{0%,100%{transform:scale(1)}15%{transform:scale(1.18)}30%{transform:scale(1)}45%{transform:scale(1.12)}}
 </style>
 </helmet>
@@ -50,37 +52,59 @@ a:hover{color:#4a121c}
 
 <!-- INTRO / SOBRE -->
 <sc-if value="{{ showOverlay }}" hint-placeholder-val="{{ true }}">
-<div onClick="{{ openEnvelope }}" style="position:fixed;inset:0;z-index:50;background:radial-gradient(120% 80% at 50% 30%,#7a2533 0%,#4a121c 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;cursor:pointer;opacity:{{ ovOpacity }};transition:opacity .8s ease;padding:24px">
+<div onClick="{{ tapOpen }}" style="position:fixed;inset:0;z-index:50;background:radial-gradient(120% 80% at 50% 30%,#7a2533 0%,#4a121c 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;cursor:pointer;opacity:{{ ovOpacity }};transition:opacity .8s ease;padding:24px">
   <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
     <div style="font:400 12px 'Jost';letter-spacing:.42em;color:#d9bd86;text-transform:uppercase">Nuestra Boda</div>
     <div style="display:flex;align-items:center;gap:10px"><div style="width:40px;height:1px;background:#d9bd86"></div><div style="width:6px;height:6px;transform:rotate(45deg);border:1px solid #d9bd86"></div><div style="width:40px;height:1px;background:#d9bd86"></div></div>
   </div>
-  <div style="position:relative;width:300px;height:200px;perspective:900px">
+  <div onPointerDown="{{ dragDown }}" onPointerMove="{{ dragMove }}" onPointerUp="{{ dragUp }}" onPointerCancel="{{ dragUp }}" style="position:relative;width:300px;height:200px;perspective:900px;touch-action:none;user-select:none;-webkit-user-select:none">
     <div style="position:absolute;inset:0;background:#e9dcc7;border-radius:4px;box-shadow:0 20px 50px rgba(0,0,0,.4);z-index:1"></div>
     <div style="position:absolute;left:18px;right:18px;top:14px;height:180px;background:#fbf6ee;border-radius:3px;z-index:2;overflow:hidden;transform:{{ cardTransform }};transition:transform 1s cubic-bezier(.2,.8,.2,1) .55s;padding:8px">
       <img src="img/hero1.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:2px">
     </div>
     <div style="position:absolute;inset:0;z-index:3;background:#f1e6d4;border-radius:4px;clip-path:polygon(0 0,50% 58%,100% 0,100% 100%,0 100%)"></div>
     <div style="position:absolute;inset:0;z-index:3;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.05));border-radius:4px;clip-path:polygon(0 100%,50% 50%,100% 100%)"></div>
-    <div style="position:absolute;left:0;right:0;top:0;height:118px;z-index:{{ flapZ }};background:#e3d3ba;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top center;transform:{{ flapTransform }};transition:transform .7s ease;border-radius:4px 4px 0 0"></div>
-    <div style="position:absolute;left:50%;top:86px;width:66px;height:66px;margin-left:-33px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#9a3343,#5c1420);border:2px solid #c9a86b;z-index:6;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.35);opacity:{{ sealOpacity }};transition:opacity .35s ease">
+    <div style="position:absolute;left:0;right:0;top:0;height:118px;z-index:{{ flapZ }};background:#e3d3ba;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top center;transform:{{ flapTransform }};transition:{{ flapTrans }};border-radius:4px 4px 0 0"></div>
+    <div style="position:absolute;left:50%;top:86px;width:66px;height:66px;margin-left:-33px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#9a3343,#5c1420);border:2px solid #c9a86b;z-index:6;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.35);opacity:{{ sealOpacity }};transform:{{ sealTransform }};transition:{{ sealTrans }}">
       <span style="font:400 26px var(--script,'Great Vibes');color:#f3dfb4;line-height:1;margin-top:4px">D&amp;C</span>
     </div>
   </div>
   <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
     <div style="font:400 54px/1.1 var(--script,'Great Vibes');color:#f5ede1">David &amp; Cleny</div>
-    <div style="font:400 13px 'Jost';letter-spacing:.3em;color:#d9bd86">28 · 11 · 2026</div>
+    <sc-if value="{{ modeNotScratch }}" hint-placeholder-val="{{ false }}">
+      <div style="font:400 13px 'Jost';letter-spacing:.3em;color:#d9bd86">28 · 11 · 2026</div>
+    </sc-if>
   </div>
-  <div style="padding:13px 28px;border:1px solid #d9bd86;border-radius:999px;font:500 12px 'Jost';letter-spacing:.28em;color:#f5ede1;text-transform:uppercase;animation:dcPulse 2.2s ease-in-out infinite">Toca para abrir</div>
+  <sc-if value="{{ modeTap }}" hint-placeholder-val="{{ false }}">
+    <div style="padding:13px 28px;border:1px solid #d9bd86;border-radius:999px;font:500 12px 'Jost';letter-spacing:.28em;color:#f5ede1;text-transform:uppercase;animation:dcPulse 2.2s ease-in-out infinite">Toca para abrir</div>
+  </sc-if>
+  <sc-if value="{{ modeSwipe }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;opacity:{{ hintOpacity }};transition:opacity .3s">
+      <div style="width:14px;height:14px;border-left:1px solid #d9bd86;border-top:1px solid #d9bd86;transform:rotate(45deg);animation:dcFloat 1.6s ease-in-out infinite"></div>
+      <div style="font:500 12px 'Jost';letter-spacing:.28em;color:#f5ede1;text-transform:uppercase">Desliza el sello hacia arriba</div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ modeScratch }}" hint-placeholder-val="{{ true }}">
+    <div onClick="{{ stop }}" style="display:flex;flex-direction:column;align-items:center;gap:12px">
+      <div style="position:relative;width:260px;height:92px;border-radius:14px;background:#fbf6ee;border:1px solid #d9bd86;box-shadow:0 10px 26px rgba(0,0,0,.3);overflow:hidden">
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px">
+          <div style="font:500 10px 'Jost';letter-spacing:.32em;color:#8a6a3a">SÁBADO</div>
+          <div style="font:500 36px/1 'Cormorant Garamond';color:#6e1f2b;letter-spacing:.06em">28 · 11 · 2026</div>
+        </div>
+        <canvas ref="{{ scratchRef }}" onPointerDown="{{ scDown }}" onPointerMove="{{ scMove }}" onPointerUp="{{ scUp }}" onPointerCancel="{{ scUp }}" style="position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:pointer;transition:opacity .7s ease"></canvas>
+      </div>
+      <div style="font:500 12px 'Jost';letter-spacing:.24em;color:#f5ede1;text-transform:uppercase;animation:dcPulse 2.2s ease-in-out infinite">{{ scratchHint }}</div>
+    </div>
+  </sc-if>
 </div>
 </sc-if>
 
 <!-- HERO -->
 <section data-screen-label="01 Portada" style="position:relative;height:100svh;min-height:600px;max-height:900px;overflow:hidden;background:#4a121c">
-  <img src="img/hero3.jpg" alt="David y Cleny" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%">
+  <img data-hero-img="" src="img/hero3.jpg" alt="David y Cleny" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;will-change:transform;transform-origin:center 40%">
   <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(43,10,16,.35) 0%,rgba(43,10,16,0) 28%,rgba(43,10,16,0) 45%,rgba(60,14,22,.82) 78%,#4a121c 100%)"></div>
   <div style="position:absolute;top:28px;left:0;right:0;text-align:center;font:400 12px 'Jost';letter-spacing:.42em;color:#f5ede1;text-transform:uppercase">Nuestra Boda</div>
-  <div style="position:absolute;left:0;right:0;bottom:56px;display:flex;flex-direction:column;align-items:center;gap:4px;color:#f5ede1;padding:0 20px">
+  <div data-hero-text="" style="position:absolute;left:0;right:0;bottom:56px;display:flex;flex-direction:column;align-items:center;gap:4px;color:#f5ede1;padding:0 20px;will-change:transform,opacity">
     <div style="font:400 76px/0.95 var(--script,'Great Vibes')">David</div>
     <div style="font:italic 400 30px/1 'Cormorant Garamond';color:#e6cc98">&amp;</div>
     <div style="font:400 76px/1.05 var(--script,'Great Vibes')">Cleny</div>
@@ -182,7 +206,7 @@ a:hover{color:#4a121c}
     <div style="display:flex;align-items:center;gap:10px"><div style="width:44px;height:1px;background:#b8955a"></div><div style="width:6px;height:6px;transform:rotate(45deg);background:#b8955a"></div><div style="width:44px;height:1px;background:#b8955a"></div></div>
   </div>
   <div data-reveal="" style="width:100%;aspect-ratio:3/2;border-radius:6px;overflow:hidden">
-    <img src="img/p12.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 35%;display:block">
+    <img data-parallax="0.07" src="img/p12.jpg" alt="" loading="lazy" style="position:relative;top:-15%;width:100%;height:130%;object-fit:cover;object-position:center 35%;display:block;will-change:transform">
   </div>
   <p data-reveal="" style="margin:0;font:400 15px/1.7 'Jost';color:#5c4a46">La recepción se llevará a cabo a las</p>
   <div data-reveal="" style="display:flex;flex-direction:column;align-items:center;gap:14px;width:100%">
@@ -304,7 +328,7 @@ a:hover{color:#4a121c}
 
 <!-- CIERRE -->
 <section data-screen-label="10 Cierre" style="position:relative;min-height:560px;overflow:hidden;display:flex;align-items:flex-end;background:#2a1416">
-  <img src="img/hero2.jpg" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%">
+  <img data-parallax="0.08" src="img/hero2.jpg" alt="" loading="lazy" style="position:absolute;left:0;top:-12%;width:100%;height:124%;object-fit:cover;object-position:center 40%;will-change:transform">
   <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(42,20,22,0) 30%,rgba(42,20,22,.85) 75%,#2a1416 100%)"></div>
   <div style="position:relative;width:100%;padding:0 30px 46px;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;color:#f5ede1">
     <p data-reveal="" style="margin:0;max-width:320px;font:italic 400 22px/1.5 'Cormorant Garamond';text-wrap:pretty">Su presencia será el mejor regalo que podríamos recibir.</p>
@@ -316,6 +340,22 @@ a:hover{color:#4a121c}
 </div>
 
 {{ heartsEl }}
+
+<div ref="{{ musicRef }}" aria-hidden="true" style="position:fixed;left:0;bottom:0;width:200px;height:200px;opacity:0;pointer-events:none;z-index:-1;overflow:hidden"></div>
+<sc-if value="{{ showMusicBtn }}" hint-placeholder-val="{{ false }}">
+<button data-tour-btn="" onClick="{{ toggleMusic }}" aria-label="{{ musicLabel }}" style="position:fixed;z-index:55;top:12px;right:max(12px, calc(50% - 218px));width:40px;height:40px;border-radius:50%;border:1px solid rgba(217,189,134,.7);background:rgba(74,18,28,.85);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:flex-end;justify-content:center;gap:3px;padding:0 0 12px;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.25)">
+  <div style="width:3px;height:14px;background:#e6cc98;border-radius:2px;transform-origin:bottom;animation:dcEq .9s ease-in-out 0s infinite;animation-play-state:{{ eqState }}"></div>
+  <div style="width:3px;height:14px;background:#e6cc98;border-radius:2px;transform-origin:bottom;animation:dcEq .9s ease-in-out -0.3s infinite;animation-play-state:{{ eqState }}"></div>
+  <div style="width:3px;height:14px;background:#e6cc98;border-radius:2px;transform-origin:bottom;animation:dcEq .9s ease-in-out -0.6s infinite;animation-play-state:{{ eqState }}"></div>
+  <div style="width:3px;height:14px;background:#e6cc98;border-radius:2px;transform-origin:bottom;animation:dcEq .9s ease-in-out -0.15s infinite;animation-play-state:{{ eqState }}"></div>
+  <sc-if value="{{ musicOff }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;left:50%;top:50%;width:26px;height:2px;margin:-1px 0 0 -13px;background:#f5ede1;transform:rotate(-45deg);box-shadow:0 0 0 1px rgba(74,18,28,.9)"></div>
+  </sc-if>
+</button>
+</sc-if>
+<sc-if value="{{ showTourBtn }}" hint-placeholder-val="{{ false }}">
+<button data-tour-btn="" onClick="{{ toggleTour }}" style="position:fixed;z-index:45;bottom:18px;right:max(16px, calc(50% - 214px));display:flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;border:1px solid rgba(217,189,134,.7);background:rgba(74,18,28,.9);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#f5ede1;font:500 11px 'Jost';letter-spacing:.2em;text-transform:uppercase;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.25)">{{ tourLabel }}</button>
+</sc-if>
 
 <!-- LIGHTBOX -->
 <sc-if value="{{ lbOpen }}" hint-placeholder-val="{{ false }}">
@@ -365,7 +405,7 @@ a:hover{color:#4a121c}
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;400px&quot;,&quot;height&quot;:&quot;820px&quot;},&quot;fuente&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Great Vibes&quot;,&quot;Ballet&quot;,&quot;Playball&quot;,&quot;Alex Brush&quot;,&quot;Parisienne&quot;,&quot;Pinyon Script&quot;],&quot;default&quot;:&quot;Great Vibes&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Estilo&quot;},&quot;whatsapp&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Confirmación&quot;},&quot;showIntro&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Secciones&quot;},&quot;showHearts&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Secciones&quot;},&quot;showGifts&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Secciones&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;400px&quot;,&quot;height&quot;:&quot;820px&quot;},&quot;intro&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Raspar&quot;,&quot;Deslizar&quot;,&quot;Tocar&quot;],&quot;default&quot;:&quot;Raspar&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Apertura de la carta&quot;},&quot;music&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Música&quot;},&quot;musicStart&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:72,&quot;min&quot;:0,&quot;max&quot;:280,&quot;unit&quot;:&quot;s&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Música&quot;},&quot;musicFile&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;music/cancion.mp3&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Música&quot;},&quot;youtubeId&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;-E5ovOA9VM8&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Música&quot;},&quot;fuente&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Great Vibes&quot;,&quot;Ballet&quot;,&quot;Playball&quot;,&quot;Alex Brush&quot;,&quot;Parisienne&quot;,&quot;Pinyon Script&quot;],&quot;default&quot;:&quot;Great Vibes&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Estilo&quot;},&quot;autoTour&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Recorrido automático&quot;},&quot;tourSpeed&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:30,&quot;max&quot;:140,&quot;step&quot;:5,&quot;unit&quot;:&quot;px/s&quot;,&quot;default&quot;:60,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Recorrido automático&quot;},&quot;whatsapp&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Confirmación&quot;},&quot;showIntro&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Secciones&quot;},&quot;showHearts&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Secciones&quot;},&quot;showGifts&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Secciones&quot;}}">
 class Component extends DCLogic {
   state = { stage: 'closed', now: Date.now(), idx: 0, lb: -1, giftOpen: false, rsvp: false, rName: '', attend: 'si', guests: 1, rMsg: '', tried: false };
   rootRef = React.createRef();
@@ -393,10 +433,79 @@ class Component extends DCLogic {
     this.applyFont();
     this.timer = setInterval(() => this.setState({ now: Date.now() }), 1000);
     this.setupReveal();
+    this.loadAudio();
+    this._firstGesture = () => { if (!this.state.musicStarted && !this._userMuted) this.playMusic(); };
+    window.addEventListener('pointerdown', this._firstGesture, true);
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onScroll);
+    this._stopper = (e) => { if (e.target && e.target.closest && e.target.closest('[data-tour-btn]')) return; this.stopTour(); };
+    ['touchstart', 'wheel', 'keydown'].forEach((t) => window.addEventListener(t, this._stopper, { passive: true }));
+    setTimeout(() => { this.applyScrollFx(); this.onCarScroll(); }, 300);
+    if (!this.showIntro() && (this.props.autoTour ?? true)) setTimeout(this.startTour, 1800);
   }
+  onScroll = () => {
+    if (this._raf) return;
+    this._raf = requestAnimationFrame(() => { this._raf = null; this.applyScrollFx(); });
+  };
+  applyScrollFx() {
+    const root = this.rootRef.current;
+    if (!root) return;
+    const vh = window.innerHeight;
+    const hi = root.querySelector('[data-hero-img]'), ht = root.querySelector('[data-hero-text]');
+    if (hi) {
+      const H = hi.parentElement.offsetHeight || vh;
+      const p = Math.min(1, Math.max(0, window.scrollY / H));
+      hi.style.transform = 'translateY(' + (p * H * 0.35) + 'px) scale(' + (1 + p * 0.15) + ')';
+      if (ht) { ht.style.opacity = String(Math.max(0, 1 - p * 1.8)); ht.style.transform = 'translateY(' + (-p * 90) + 'px)'; }
+    }
+    root.querySelectorAll('[data-parallax]').forEach((el) => {
+      const r = el.parentElement.getBoundingClientRect();
+      if (r.bottom < -100 || r.top > vh + 100) return;
+      const off = r.top + r.height / 2 - vh / 2;
+      el.style.transform = 'translateY(' + (-off * parseFloat(el.dataset.parallax)) + 'px)';
+    });
+  }
+  startTour = () => {
+    if (this._touring) return;
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) window.scrollTo(0, 0);
+    this._touring = true; this._acc = 0;
+    this.setState({ tour: true });
+    let last = performance.now(), lastSlide = last;
+    const tick = (t) => {
+      if (!this._touring) return;
+      const dt = Math.min(64, t - last); last = t;
+      let speed = this.props.tourSpeed ?? 60;
+      const car = this.carRef.current;
+      if (car) {
+        const r = car.getBoundingClientRect(), vh = window.innerHeight;
+        if (r.top < vh * 0.65 && r.bottom > vh * 0.35) {
+          speed *= 0.35;
+          if (t - lastSlide > 1900) { lastSlide = t; this.goTo(this.state.idx + 1); }
+        }
+      }
+      this._acc += speed * dt / 1000;
+      const step = Math.floor(this._acc);
+      if (step) { window.scrollBy(0, step); this._acc -= step; }
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) { this.stopTour(); return; }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  stopTour = () => {
+    if (!this._touring) return;
+    this._touring = false;
+    this.setState({ tour: false });
+  };
   componentWillUnmount() {
     clearInterval(this.timer);
     this.io && this.io.disconnect();
+    this._touring = false;
+    window.removeEventListener('pointerdown', this._firstGesture, true);
+    try { this._yt && this._yt.destroy(); } catch (e) {}
+    if (this._au) { this._au.pause(); this._au = null; }
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.onScroll);
+    ['touchstart', 'wheel', 'keydown'].forEach((t) => window.removeEventListener(t, this._stopper));
     document.body.style.overflow = '';
   }
   componentDidUpdate() {
@@ -410,30 +519,198 @@ class Component extends DCLogic {
     const root = this.rootRef.current;
     if (!root || !('IntersectionObserver' in window)) return;
     this.io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          e.target.style.opacity = '1';
-          e.target.style.transform = 'none';
-          this.io.unobserve(e.target);
-        }
+      entries.filter((e) => e.isIntersecting).forEach((e, i) => {
+        const el = e.target;
+        el.style.transitionDelay = (i * 110) + 'ms';
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+        el.style.filter = 'none';
+        this.io.unobserve(el);
       });
     }, { threshold: 0.12 });
     const watch = () => root.querySelectorAll('[data-reveal]:not([data-rv])').forEach((el) => {
       el.setAttribute('data-rv', '');
+      const v = el.querySelector('h2') ? 'blur' : (el.querySelector('img') ? 'zoom' : 'up');
       el.style.opacity = '0';
-      el.style.transform = 'translateY(22px)';
-      el.style.transition = 'opacity .9s ease, transform .9s cubic-bezier(.2,.8,.2,1)';
+      el.style.transform = v === 'zoom' ? 'scale(.9)' : v === 'blur' ? 'translateY(14px) scale(.96)' : 'translateY(30px)';
+      if (v === 'blur') el.style.filter = 'blur(10px)';
+      el.style.transition = 'opacity 1s ease, transform 1.2s cubic-bezier(.2,.8,.2,1), filter 1s ease';
       this.io.observe(el);
     });
     watch();
     setTimeout(watch, 600);
   }
 
+  introMode() { return this.props.intro ?? 'Raspar'; }
+  ytId() { return this.props.youtubeId || '-E5ovOA9VM8'; }
+  musicRef = (el) => { this._musicHost = el || this._musicHost; };
+  loadYT() {
+    if (!(this.props.music ?? true)) return;
+    const make = () => {
+      if (this._yt || !this._musicHost) return;
+      const d = document.createElement('div'); this._musicHost.appendChild(d);
+      this._yt = new window.YT.Player(d, {
+        width: 200, height: 200, videoId: this.ytId(),
+        playerVars: { autoplay: 0, controls: 0, loop: 1, playlist: this.ytId(), playsinline: 1, start: this.props.musicStart ?? 72 },
+        events: {
+          onReady: () => { this._ytReady = true; if (this._wantPlay) this.playMusic(); },
+          onStateChange: (e) => { if (e.data === 1) this.setState({ musicOn: true, musicStarted: true }); if (e.data === 2) this.setState({ musicOn: false }); },
+        },
+      });
+    };
+    if (window.YT && window.YT.Player) return make();
+    const prev = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = () => { prev && prev(); make(); };
+    if (!document.querySelector('script[src*="youtube.com/iframe_api"]')) {
+      const s = document.createElement('script'); s.src = 'https://www.youtube.com/iframe_api'; document.head.appendChild(s);
+    }
+  }
+  loadAudio() {
+    if (!(this.props.music ?? true)) return;
+    const src = (window.__resources && window.__resources.song) || this.props.musicFile || 'music/cancion.mp3';
+    const start = this.props.musicStart ?? 72;
+    const au = new Audio(); au.loop = false; au.preload = 'auto'; au.volume = 0.7;
+    const seekStart = () => { try { if (au.currentTime < start) au.currentTime = start; } catch (e) {} };
+    au.addEventListener('loadedmetadata', seekStart);
+    au.addEventListener('ended', () => { au.currentTime = start; au.play().catch(() => {}); });
+    au.addEventListener('play', () => {
+      seekStart();
+      if (!this._faded) {
+        this._faded = true; au.volume = 0; const t0 = performance.now();
+        const fade = (t) => { const k = Math.min(1, (t - t0) / 2500); au.volume = 0.7 * k; if (k < 1) requestAnimationFrame(fade); };
+        requestAnimationFrame(fade);
+      }
+      this.setState({ musicOn: true, musicStarted: true });
+    });
+    au.addEventListener('pause', () => this.setState({ musicOn: false }));
+    au.addEventListener('error', () => { this._auBad = true; this._au = null; this.loadYT(); });
+    au.src = src; this._au = au;
+  }
+  playMusic = () => {
+    this._wantPlay = true;
+    if (this._au && !this._auBad) { this._au.play().catch(() => {}); this.setState({ musicStarted: true }); return; }
+    if (!this._ytReady || !this._yt) return;
+    try { this._yt.unMute(); this._yt.setVolume(70); this._yt.playVideo(); } catch (e) {}
+    this.setState({ musicStarted: true });
+  };
+  toggleMusic = () => {
+    if (this._au && !this._auBad) {
+      if (this.state.musicOn) { this._userMuted = true; this._au.pause(); } else { this._userMuted = false; this._au.play().catch(() => {}); }
+      return;
+    }
+    if (!this._yt || !this._ytReady) { this.playMusic(); return; }
+    if (this.state.musicOn) { this._userMuted = true; this._yt.pauseVideo(); this.setState({ musicOn: false }); }
+    else { this._userMuted = false; this._yt.playVideo(); this.setState({ musicOn: true }); }
+  };
+  dragDown = (e) => {
+    if (this.introMode() !== 'Deslizar' || this.state.stage !== 'closed') return;
+    this._dy0 = e.clientY; e.currentTarget.setPointerCapture && e.currentTarget.setPointerCapture(e.pointerId);
+    this.setState({ dragging: true, dragP: 0 });
+  };
+  dragMove = (e) => {
+    if (!this.state.dragging) return;
+    this.setState({ dragP: Math.max(0, Math.min(1, (this._dy0 - e.clientY) / 140)) });
+  };
+  dragUp = () => {
+    if (!this.state.dragging) return;
+    const ok = this.state.dragP > 0.45;
+    this.setState({ dragging: false, dragP: ok ? 1 : 0 });
+    if (ok) this.openEnvelope();
+  };
+  scratchRef = (el) => {
+    if (!el || el === this._sc) return;
+    this._sc = el; this._scDone = false; this._scTouched = false;
+    this.paintScratch();
+    document.fonts && document.fonts.ready.then(() => { if (!this._scTouched) this.paintScratch(); });
+  };
+  paintScratch() {
+    const el = this._sc; if (!el) return;
+    const dpr = window.devicePixelRatio || 1, w = el.clientWidth || 260, h = el.clientHeight || 92;
+    el.width = w * dpr; el.height = h * dpr;
+    const ctx = el.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.globalCompositeOperation = 'source-over';
+    const g = ctx.createLinearGradient(0, 0, w, h);
+    g.addColorStop(0, '#a8823f'); g.addColorStop(0.35, '#e6cc98'); g.addColorStop(0.5, '#f8ebc9'); g.addColorStop(0.65, '#d9bd86'); g.addColorStop(1, '#a8823f');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+    for (let i = 0; i < 70; i++) { ctx.fillStyle = 'rgba(255,255,255,' + (0.2 + Math.random() * 0.5) + ')'; ctx.beginPath(); ctx.arc(Math.random() * w, Math.random() * h, Math.random() * 1.4 + 0.3, 0, 7); ctx.fill(); }
+    ctx.fillStyle = '#6e1f2b'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.font = "500 13px Jost, sans-serif"; try { ctx.letterSpacing = '4px'; } catch (e) {}
+    ctx.fillText('RASPA AQUÍ  ♥', w / 2, h / 2);
+  }
+  burst(x, y) {
+    const c = document.createElement('canvas'), dpr = window.devicePixelRatio || 1, W = window.innerWidth, H = window.innerHeight;
+    c.width = W * dpr; c.height = H * dpr;
+    Object.assign(c.style, { position: 'fixed', left: '0', top: '0', width: W + 'px', height: H + 'px', zIndex: '58', pointerEvents: 'none' });
+    document.body.appendChild(c);
+    const ctx = c.getContext('2d'); ctx.scale(dpr, dpr);
+    const cols = ['#d8657f', '#f2a7b8', '#e6cc98', '#f8ebc9', '#fdb49b', '#b783dc', '#ffffff', '#c9a86b'];
+    const ps = Array.from({ length: 160 }, (_, i) => {
+      const a = Math.random() * Math.PI * 2, s = 4 + Math.random() * 10;
+      return { x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s - 5, g: 0.16 + Math.random() * 0.1, r: Math.random() * 6.28, vr: (Math.random() - 0.5) * 0.35, size: 5 + Math.random() * 9, kind: i % 4, col: cols[i % cols.length] };
+    });
+    const t0 = performance.now();
+    const frame = (t) => {
+      const el = (t - t0) / 1000;
+      ctx.clearRect(0, 0, W, H);
+      if (el < 0.7) {
+        const k = el / 0.7;
+        const g = ctx.createRadialGradient(x, y, 0, x, y, 40 + k * 260);
+        g.addColorStop(0, 'rgba(255,246,222,' + (0.85 * (1 - k)) + ')'); g.addColorStop(1, 'rgba(255,246,222,0)');
+        ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+        ctx.beginPath(); ctx.arc(x, y, 30 + k * 280, 0, 7);
+        ctx.strokeStyle = 'rgba(230,204,152,' + (1 - k) + ')'; ctx.lineWidth = 1 + 7 * (1 - k); ctx.stroke();
+      }
+      const alpha = Math.max(0, 1 - Math.max(0, el - 1.2) / 1.1);
+      ps.forEach((p) => {
+        p.vx *= 0.985; p.vy = p.vy * 0.985 + p.g; p.x += p.vx; p.y += p.vy; p.r += p.vr;
+        ctx.save(); ctx.globalAlpha = alpha; ctx.translate(p.x, p.y); ctx.rotate(p.r); ctx.fillStyle = p.col;
+        if (p.kind === 0) { ctx.font = (p.size * 1.8) + 'px serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('♥', 0, 0); }
+        else if (p.kind === 1) { ctx.beginPath(); ctx.arc(0, 0, p.size / 3, 0, 7); ctx.fill(); }
+        else ctx.fillRect(-p.size / 2, -p.size / 5, p.size, p.size / 2.5);
+        ctx.restore();
+      });
+      if (el < 2.4) requestAnimationFrame(frame); else c.remove();
+    };
+    requestAnimationFrame(frame);
+  }
+  scPoint(e) { const r = this._sc.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; }
+  scDown = (e) => {
+    if (this._scDone || !this._sc) return;
+    e.currentTarget.setPointerCapture && e.currentTarget.setPointerCapture(e.pointerId);
+    this._scOn = true; this._scTouched = true; this._scLast = this.scPoint(e); this._scN = 0; this.scDraw(this._scLast);
+  };
+  scMove = (e) => { if (this._scOn) this.scDraw(this.scPoint(e)); };
+  scUp = () => { this._scOn = false; this.scCheck(); };
+  scDraw(pt) {
+    const ctx = this._sc.getContext('2d');
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.lineWidth = 34; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.beginPath(); ctx.moveTo(this._scLast[0], this._scLast[1]); ctx.lineTo(pt[0], pt[1]); ctx.stroke();
+    this._scLast = pt;
+    if (++this._scN % 8 === 0) this.scCheck();
+  }
+  scCheck() {
+    if (this._scDone || !this._sc) return;
+    const el = this._sc, d = el.getContext('2d').getImageData(0, 0, el.width, el.height).data;
+    let clear = 0, tot = 0;
+    for (let i = 3; i < d.length; i += 64) { tot++; if (d[i] < 128) clear++; }
+    if (clear / tot > 0.5) {
+      this._scDone = true; this._scOn = false;
+      el.style.opacity = '0'; el.style.pointerEvents = 'none';
+      this.setState({ scratched: true });
+      const r = el.getBoundingClientRect();
+      const card = el.parentElement;
+      card.animate && card.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.14)' }, { transform: 'scale(1)' }], { duration: 650, easing: 'cubic-bezier(.3,1.6,.5,1)' });
+      navigator.vibrate && navigator.vibrate([30, 40, 60]);
+      this.burst(r.left + r.width / 2, r.top + r.height / 2);
+      setTimeout(this.openEnvelope, 1500);
+    }
+  }
   openEnvelope = () => {
     if (this.state.stage !== 'closed') return;
     this.setState({ stage: 'opening' });
     setTimeout(() => this.setState({ stage: 'fading' }), 1700);
-    setTimeout(() => { this.setState({ stage: 'gone' }); window.scrollTo(0, 0); }, 2500);
+    setTimeout(() => { this.setState({ stage: 'gone' }); window.scrollTo(0, 0); if (this.props.autoTour ?? true) setTimeout(this.startTour, 1500); }, 2500);
   };
 
   slides() { return this.carRef.current ? this.carRef.current.querySelectorAll('[data-slide]') : []; }
@@ -448,6 +725,11 @@ class Component extends DCLogic {
     const el = this.carRef.current, s = this.slides();
     if (!el || !s.length) return;
     const center = el.scrollLeft + el.clientWidth / 2;
+    s.forEach((c) => {
+      const k = Math.min(1, Math.abs(c.offsetLeft + c.offsetWidth / 2 - center) / c.offsetWidth);
+      c.style.transform = 'scale(' + (1 - k * 0.1) + ')';
+      c.style.opacity = String(1 - k * 0.4);
+    });
     let best = 0, bd = Infinity;
     s.forEach((c, i) => { const d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - center); if (d < bd) { bd = d; best = i; } });
     if (best !== this.state.idx) {
@@ -491,7 +773,7 @@ class Component extends DCLogic {
 
     const photos = this.srcs.map((src, i) => ({
       src,
-      open: () => this.setState({ lb: i }),
+      open: () => { this.stopTour(); this.setState({ lb: i }); },
       go: () => this.goTo(i),
       op: i === st.idx ? 1 : 0.5,
       oc: i === st.idx ? '#d9bd86' : 'transparent',
@@ -505,11 +787,28 @@ class Component extends DCLogic {
     return {
       rootRef: this.rootRef, carRef: this.carRef, thumbRef: this.thumbRef,
       showOverlay: this.showIntro() && st.stage !== 'gone',
+      showTourBtn: (!this.showIntro() || st.stage === 'gone') && st.lb < 0 && !st.rsvp,
+      tourLabel: st.tour ? '❚❚  Pausar' : '▶  Recorrido',
+      toggleTour: () => (this._touring ? this.stopTour() : this.startTour()),
       heartsEl: (this.props.showHearts ?? true) && (!this.showIntro() || st.stage !== 'closed') ? (this._hn || (this._hn = this.heartsNode())) : null,
       openEnvelope: this.openEnvelope,
+      musicRef: this.musicRef, toggleMusic: this.toggleMusic,
+      showMusicBtn: (this.props.music ?? true) && (st.musicStarted || st.stage === 'gone' || !this.showIntro()) && st.lb < 0,
+      musicOff: !st.musicOn, eqState: st.musicOn ? 'running' : 'paused',
+      musicLabel: st.musicOn ? 'Silenciar música' : 'Activar música',
+      tapOpen: this.introMode() === 'Tocar' ? this.openEnvelope : undefined,
+      modeTap: this.introMode() === 'Tocar', modeSwipe: this.introMode() === 'Deslizar', modeScratch: this.introMode() === 'Raspar',
+      modeNotScratch: this.introMode() !== 'Raspar',
+      scratchRef: this.scratchRef, scDown: this.scDown, scMove: this.scMove, scUp: this.scUp,
+      scratchHint: st.scratched ? '¡Nos casamos!  ♥' : 'Raspa para descubrir la fecha',
+      dragDown: this.dragDown, dragMove: this.dragMove, dragUp: this.dragUp,
+      hintOpacity: st.dragging ? 0 : 1,
+      flapTrans: st.dragging ? 'none' : 'transform .7s ease',
+      sealTransform: closed ? 'translateY(' + (-(st.dragP || 0) * 60) + 'px)' : 'translateY(-60px)',
+      sealTrans: st.dragging ? 'opacity .35s ease' : 'opacity .35s ease, transform .5s ease',
       ovOpacity: st.stage === 'fading' ? 0 : 1,
-      flapTransform: closed ? 'rotateX(0deg)' : 'rotateX(180deg)',
-      flapZ: closed ? 4 : 1,
+      flapTransform: closed ? 'rotateX(' + ((st.dragP || 0) * 170) + 'deg)' : 'rotateX(180deg)',
+      flapZ: closed && (st.dragP || 0) < 0.5 ? 4 : 1,
       cardTransform: closed ? 'translateY(0)' : 'translateY(-110px)',
       sealOpacity: closed ? 1 : 0,
 
@@ -542,7 +841,7 @@ class Component extends DCLogic {
       giftHint: st.giftOpen ? 'Toca para cerrar' : 'Toca para abrir',
 
       rsvpOpen: st.rsvp,
-      openRsvp: () => this.setState({ rsvp: true, tried: false }),
+      openRsvp: () => { this.stopTour(); this.setState({ rsvp: true, tried: false }); },
       closeRsvp: () => this.setState({ rsvp: false }),
       stop: (e) => e.stopPropagation(),
       rName: st.rName, rMsg: st.rMsg, rGuests: st.guests,
