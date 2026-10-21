@@ -434,8 +434,12 @@ class Component extends DCLogic {
     this.timer = setInterval(() => this.setState({ now: Date.now() }), 1000);
     this.setupReveal();
     this.loadAudio();
-    this._firstGesture = () => { if (!this.state.musicStarted && !this._userMuted) this.playMusic(); };
-    window.addEventListener('pointerdown', this._firstGesture, true);
+    // Intentar reproducir apenas carga; si el navegador lo bloquea, arrancar con el primer toque/tecla
+    this._gestEvents = ['pointerdown', 'touchstart', 'touchend', 'click', 'keydown'];
+    this._firstGesture = () => { if (!this._playing && !this._userMuted) this.playMusic(); };
+    this._gestEvents.forEach((ev) => window.addEventListener(ev, this._firstGesture, true));
+    this.playMusic();
+    setTimeout(() => { if (!this._playing && !this._userMuted) this.playMusic(); }, 800);
     window.addEventListener('scroll', this.onScroll, { passive: true });
     window.addEventListener('resize', this.onScroll);
     this._stopper = (e) => { if (e.target && e.target.closest && e.target.closest('[data-tour-btn]')) return; this.stopTour(); };
@@ -500,7 +504,7 @@ class Component extends DCLogic {
     clearInterval(this.timer);
     this.io && this.io.disconnect();
     this._touring = false;
-    window.removeEventListener('pointerdown', this._firstGesture, true);
+    (this._gestEvents || []).forEach((ev) => window.removeEventListener(ev, this._firstGesture, true));
     try { this._yt && this._yt.destroy(); } catch (e) {}
     if (this._au) { this._au.pause(); this._au = null; }
     window.removeEventListener('scroll', this.onScroll);
@@ -574,6 +578,8 @@ class Component extends DCLogic {
     au.addEventListener('loadedmetadata', seekStart);
     au.addEventListener('ended', () => { au.currentTime = start; au.play().catch(() => {}); });
     au.addEventListener('play', () => {
+      this._playing = true;
+      (this._gestEvents || []).forEach((ev) => window.removeEventListener(ev, this._firstGesture, true));
       seekStart();
       if (!this._faded) {
         this._faded = true; au.volume = 0; const t0 = performance.now();
@@ -588,7 +594,7 @@ class Component extends DCLogic {
   }
   playMusic = () => {
     this._wantPlay = true;
-    if (this._au && !this._auBad) { this._au.play().catch(() => {}); this.setState({ musicStarted: true }); return; }
+    if (this._au && !this._auBad) { this._au.play().catch(() => {}); return; }
     if (!this._ytReady || !this._yt) return;
     try { this._yt.unMute(); this._yt.setVolume(70); this._yt.playVideo(); } catch (e) {}
     this.setState({ musicStarted: true });
