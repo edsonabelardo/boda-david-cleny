@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#4a121c">
+<title>David &amp; Cleny · Nuestra Boda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Pinyon+Script&amp;family=Jost:wght@300;400;500&amp;display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+html,body{margin:0;padding:0;background:#2a1416;-webkit-tap-highlight-color:transparent}
+*{box-sizing:border-box}
+a{color:#6e1f2b;text-decoration:none}
+a:hover{color:#4a121c}
+[data-noscrollbar]::-webkit-scrollbar{display:none}
+@keyframes dcPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.06);opacity:.85}}
+@keyframes dcFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+</style>
+</helmet>
+
+<div ref="{{ rootRef }}" style="min-height:100vh;background:#2a1416;font-family:'Jost',sans-serif;color:#2b1b1d">
+<div style="max-width:460px;margin:0 auto;background:#fbf6ee;position:relative;overflow:hidden;box-shadow:0 0 60px rgba(0,0,0,.45)">
+
+<!-- INTRO / SOBRE -->
+<sc-if value="{{ showOverlay }}" hint-placeholder-val="{{ true }}">
+<div onClick="{{ openEnvelope }}" style="position:fixed;inset:0;z-index:50;background:radial-gradient(120% 80% at 50% 30%,#7a2533 0%,#4a121c 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;cursor:pointer;opacity:{{ ovOpacity }};transition:opacity .8s ease;padding:24px">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+    <div style="font:400 12px 'Jost';letter-spacing:.42em;color:#d9bd86;text-transform:uppercase">Nuestra Boda</div>
+    <div style="display:flex;align-items:center;gap:10px"><div style="width:40px;height:1px;background:#d9bd86"></div><div style="width:6px;height:6px;transform:rotate(45deg);border:1px solid #d9bd86"></div><div style="width:40px;height:1px;background:#d9bd86"></div></div>
+  </div>
+  <div style="position:relative;width:300px;height:200px;perspective:900px">
+    <div style="position:absolute;inset:0;background:#e9dcc7;border-radius:4px;box-shadow:0 20px 50px rgba(0,0,0,.4);z-index:1"></div>
+    <div style="position:absolute;left:18px;right:18px;top:14px;height:180px;background:#fbf6ee;border-radius:3px;z-index:2;overflow:hidden;transform:{{ cardTransform }};transition:transform 1s cubic-bezier(.2,.8,.2,1) .55s;padding:8px">
+      <img src="img/hero1.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:2px">
+    </div>
+    <div style="position:absolute;inset:0;z-index:3;background:#f1e6d4;border-radius:4px;clip-path:polygon(0 0,50% 58%,100% 0,100% 100%,0 100%)"></div>
+    <div style="position:absolute;inset:0;z-index:3;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.05));border-radius:4px;clip-path:polygon(0 100%,50% 50%,100% 100%)"></div>
+    <div style="position:absolute;left:0;right:0;top:0;height:118px;z-index:{{ flapZ }};background:#e3d3ba;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top center;transform:{{ flapTransform }};transition:transform .7s ease;border-radius:4px 4px 0 0"></div>
+    <div style="position:absolute;left:50%;top:86px;width:66px;height:66px;margin-left:-33px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#9a3343,#5c1420);border:2px solid #c9a86b;z-index:6;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.35);opacity:{{ sealOpacity }};transition:opacity .35s ease">
+      <span style="font:400 26px 'Pinyon Script';color:#f3dfb4;line-height:1;margin-top:4px">D&amp;C</span>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+    <div style="font:400 54px/1.1 'Pinyon Script';color:#f5ede1">David &amp; Cleny</div>
+    <div style="font:400 13px 'Jost';letter-spacing:.3em;color:#d9bd86">28 · 11 · 2026</div>
+  </div>
+  <div style="padding:13px 28px;border:1px solid #d9bd86;border-radius:999px;font:500 12px 'Jost';letter-spacing:.28em;color:#f5ede1;text-transform:uppercase;animation:dcPulse 2.2s ease-in-out infinite">Toca para abrir</div>
+</div>
+</sc-if>
+
+<!-- HERO -->
+<section data-screen-label="01 Portada" style="position:relative;height:100svh;min-height:600px;max-height:900px;overflow:hidden;background:#4a121c">
+  <img src="img/hero3.jpg" alt="David y Cleny" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%">
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(43,10,16,.35) 0%,rgba(43,10,16,0) 28%,rgba(43,10,16,0) 45%,rgba(60,14,22,.82) 78%,#4a121c 100%)"></div>
+  <div style="position:absolute;top:28px;left:0;right:0;text-align:center;font:400 12px 'Jost';letter-spacing:.42em;color:#f5ede1;text-transform:uppercase">Nuestra Boda</div>
+  <div style="position:absolute;left:0;right:0;bottom:56px;display:flex;flex-direction:column;align-items:center;gap:4px;color:#f5ede1;padding:0 20px">
+    <div style="font:400 76px/0.95 'Pinyon Script'">David</div>
+    <div style="font:italic 400 30px/1 'Cormorant Garamond';color:#e6cc98">&amp;</div>
+    <div style="font:400 76px/1.05 'Pinyon Script'">Cleny</div>
+    <div style="display:flex;align-items:center;gap:12px;margin-top:14px">
+      <div style="width:36px;height:1px;background:#d9bd86"></div>
+      <div style="font:400 13px 'Jost';letter-spacing:.32em">28 · NOVIEMBRE · 2026</div>
+      <div style="width:36px;height:1px;background:#d9bd86"></div>
+    </div>
+  </div>
+  <div style="position:absolute;bottom:16px;left:50%;margin-left:-10px;width:20px;height:20px;border-right:1px solid #d9bd86;border-bottom:1px solid #d9bd86;transform:rotate(45deg);animation:dcFloat 2s ease-in-out infinite;opacity:.8"></div>
+</section>
+
+<!-- VERSO -->
+<section style="background:#4a121c;padding:56px 34px 64px;text-align:center;color:#f5ede1">
+  <p data-reveal="" style="margin:0 auto;max-width:340px;font:italic 400 21px/1.55 'Cormorant Garamond';text-wrap:pretty">“Así que ya no son dos, sino uno solo. Por tanto, lo que Dios ha unido, que no lo separe el hombre.”</p>
+  <div data-reveal="" style="margin-top:14px;font:400 11px 'Jost';letter-spacing:.32em;color:#d9bd86">MATEO 19:6</div>
+</section>
+
+<!-- CEREMONIA -->
+<section data-screen-label="02 Ceremonia" style="padding:56px 20px;background:#fbf6ee">
+  <div style="border:1px solid #d8c29a;padding:6px">
+  <div style="border:1px solid #e7d7bb;padding:40px 22px 36px;display:flex;flex-direction:column;align-items:center;gap:26px;text-align:center">
+    <div data-reveal="" style="display:flex;flex-direction:column;align-items:center;gap:12px">
+      <div style="font:400 11px 'Jost';letter-spacing:.36em;color:#8a6a3a;text-transform:uppercase">Con la bendición de Dios</div>
+      <h2 style="margin:0;font:italic 500 38px/1.05 'Cormorant Garamond';color:#6e1f2b">Ceremonia Religiosa</h2>
+      <div style="display:flex;align-items:center;gap:10px"><div style="width:44px;height:1px;background:#b8955a"></div><div style="width:6px;height:6px;transform:rotate(45deg);background:#b8955a"></div><div style="width:44px;height:1px;background:#b8955a"></div></div>
+    </div>
+    <p data-reveal="" style="margin:0;max-width:320px;font:400 15px/1.7 'Jost';color:#5c4a46;text-wrap:pretty">Junto a nuestros padres, tenemos el honor de invitarte a celebrar nuestra unión matrimonial.</p>
+    <div data-reveal="" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;width:100%">
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="font:500 10px 'Jost';letter-spacing:.28em;color:#8a6a3a;text-transform:uppercase">Padres del novio</div>
+        <div style="font:500 18px/1.3 'Cormorant Garamond';color:#2b1b1d">Justino Vargas Palomino</div>
+        <div style="font:500 18px/1.3 'Cormorant Garamond';color:#2b1b1d">Natividad Salas Orosco</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="font:500 10px 'Jost';letter-spacing:.28em;color:#8a6a3a;text-transform:uppercase">Padres de la novia</div>
+        <div style="font:500 18px/1.3 'Cormorant Garamond';color:#2b1b1d">Andrés Alarcón Choque</div>
+        <div style="font:500 18px/1.3 'Cormorant Garamond';color:#2b1b1d">Eribertina Orihuela Fuentes</div>
+      </div>
+    </div>
+    <div data-reveal="" style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:22px 0;border-top:1px solid #ead9bd;border-bottom:1px solid #ead9bd;width:100%">
+      <div style="font:400 38px/1.15 'Pinyon Script';color:#6e1f2b">David Vargas Salas</div>
+      <div style="font:italic 400 24px/1 'Cormorant Garamond';color:#b8955a">&amp;</div>
+      <div style="font:400 38px/1.15 'Pinyon Script';color:#6e1f2b;text-wrap:balance">Cleny Dayana Alarcón Orihuela</div>
+    </div>
+    <div data-reveal="" style="display:flex;flex-direction:column;gap:8px;align-items:center">
+      <div style="font:500 10px 'Jost';letter-spacing:.28em;color:#8a6a3a;text-transform:uppercase">Nuestros padrinos</div>
+      <div style="font:500 18px/1.35 'Cormorant Garamond';color:#2b1b1d">Daniel &amp; Aurelia Choqque</div>
+      <div style="font:500 18px/1.35 'Cormorant Garamond';color:#2b1b1d">Francisco Ochoa Becerra &amp; Cleofe Moreano</div>
+    </div>
+    <div data-reveal="" style="display:flex;flex-direction:column;align-items:center;gap:14px;width:100%">
+      <div style="font:500 12px 'Jost';letter-spacing:.3em;color:#6e1f2b">A LAS 2:30 PM</div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:14px;width:100%;max-width:300px">
+        <div style="border-top:1px solid #b8955a;border-bottom:1px solid #b8955a;padding:9px 0;font:500 11px 'Jost';letter-spacing:.24em;color:#6e1f2b">SÁBADO</div>
+        <div style="font:500 66px/1 'Cormorant Garamond';color:#6e1f2b">28</div>
+        <div style="border-top:1px solid #b8955a;border-bottom:1px solid #b8955a;padding:9px 0;font:500 11px 'Jost';letter-spacing:.2em;color:#6e1f2b">NOV 2026</div>
+      </div>
+    </div>
+    <div data-reveal="" style="display:flex;flex-direction:column;align-items:center;gap:12px">
+      <div style="font:italic 500 24px 'Cormorant Garamond';color:#2b1b1d">Templo de Almudena</div>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=Templo%20de%20Almudena%20Cusco" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;min-height:46px;padding:0 28px;border-radius:999px;background:#6e1f2b;color:#f5ede1;font:500 12px 'Jost';letter-spacing:.24em;text-transform:uppercase">Cómo llegar</a>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<section data-screen-label="03 Galería" style="background:#4a121c;padding:60px 0 52px;color:#f5ede1">
+  <div data-reveal="" style="display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:28px;padding:0 20px;text-align:center">
+    <div style="font:400 11px 'Jost';letter-spacing:.36em;color:#d9bd86;text-transform:uppercase">Nuestra historia</div>
+    <h2 style="margin:0;font:italic 500 38px/1.05 'Cormorant Garamond'">Galería de Fotos</h2>
+  </div>
+  <div ref="{{ carRef }}" onScroll="{{ onCarScroll }}" data-noscrollbar="" style="position:relative;display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 9%;scrollbar-width:none;-webkit-overflow-scrolling:touch">
+    <sc-for list="{{ photos }}" as="p" hint-placeholder-count="3">
+      <div data-slide="" onClick="{{ p.open }}" style="flex:0 0 82%;aspect-ratio:4/5;scroll-snap-align:center;border-radius:6px;overflow:hidden;background:#3a0e16;cursor:zoom-in;box-shadow:0 14px 30px rgba(0,0,0,.35)">
+        <img src="{{ p.src }}" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">
+      </div>
+    </sc-for>
+  </div>
+  <div style="display:flex;align-items:center;justify-content:center;gap:22px;margin-top:20px">
+    <button onClick="{{ prevSlide }}" aria-label="Anterior" style="width:44px;height:44px;border-radius:50%;border:1px solid #d9bd86;background:transparent;color:#f5ede1;font:400 22px/1 'Cormorant Garamond';cursor:pointer">‹</button>
+    <div style="font:400 13px 'Jost';letter-spacing:.22em;color:#d9bd86;min-width:70px;text-align:center">{{ counter }}</div>
+    <button onClick="{{ nextSlide }}" aria-label="Siguiente" style="width:44px;height:44px;border-radius:50%;border:1px solid #d9bd86;background:transparent;color:#f5ede1;font:400 22px/1 'Cormorant Garamond';cursor:pointer">›</button>
+  </div>
+  <div ref="{{ thumbRef }}" data-noscrollbar="" style="position:relative;display:flex;gap:8px;overflow-x:auto;padding:18px 20px 0;scrollbar-width:none">
+    <sc-for list="{{ photos }}" as="p" hint-placeholder-count="6">
+      <div data-thumb="" onClick="{{ p.go }}" style="flex:0 0 54px;height:54px;border-radius:4px;overflow:hidden;cursor:pointer;opacity:{{ p.op }};outline:2px solid {{ p.oc }};outline-offset:-2px;transition:opacity .25s">
+        <img src="{{ p.src }}" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<!-- RECEPCIÓN -->
+<section data-screen-label="04 Recepción" style="padding:60px 24px;background:#fbf6ee;display:flex;flex-direction:column;align-items:center;gap:24px;text-align:center">
+  <div data-reveal="" style="display:flex;flex-direction:column;align-items:center;gap:12px">
+    <div style="font:400 11px 'Jost';letter-spacing:.36em;color:#8a6a3a;text-transform:uppercase">Después de la ceremonia</div>
+    <h2 style="margin:0;font:italic 500 38px/1.05 'Cormorant Garamond';color:#6e1f2b">Recepción</h2>
+    <div style="display:flex;align-items:center;gap:10px"><div style="width:44px;height:1px;background:#b8955a"></div><div style="width:6px;height:6px;transform:rotate(45deg);background:#b8955a"></div><div style="width:44px;height:1px;background:#b8955a"></div></div>
+  </div>
+  <div data-reveal="" style="width:100%;aspect-ratio:3/2;border-radius:6px;overflow:hidden">
+    <img src="img/p12.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 35%;display:block">
+  </div>
+  <p data-reveal="" style="margin:0;font:400 15px/1.7 'Jost';color:#5c4a46">La recepción se llevará a cabo a las</p>
+  <div data-reveal="" style="display:flex;flex-direction:column;align-items:center;gap:14px;width:100%">
+    <div style="font:500 12px 'Jost';letter-spacing:.3em;color:#6e1f2b">5:00 PM</div>
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:14px;width:100%;max-width:300px">
+      <div style="border-top:1px solid #b8955a;border-bottom:1px solid #b8955a;padding:9px 0;font:500 11px 'Jost';letter-spacing:.24em;color:#6e1f2b">SÁBADO</div>
+      <div style="font:500 66px/1 'Cormorant Garamond';color:#6e1f2b">28</div>
+      <div style="border-top:1px solid #b8955a;border-bottom:1px solid #b8955a;padding:9px 0;font:500 11px 'Jost';letter-spacing:.2em;color:#6e1f2b">NOV 2026</div>
+    </div>
+  </div>
+  <div data-reveal="" style="display:flex;flex-direction:column;align-items:center;gap:12px">
+    <div style="font:500 10px 'Jost';letter-spacing:.28em;color:#8a6a3a;text-transform:uppercase">Lugar</div>
+    <div style="font:italic 500 26px/1.2 'Cormorant Garamond';color:#2b1b1d">Salón Multiusos Pillao Matao</div>
+    <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Salon%20Multiusos%20Pillao%20Matao" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;min-height:46px;padding:0 28px;border-radius:999px;background:#6e1f2b;color:#f5ede1;font:500 12px 'Jost';letter-spacing:.24em;text-transform:uppercase">Cómo llegar</a>
+  </div>
+</section>
+
+<!-- CUENTA REGRESIVA -->
+<section data-screen-label="05 Cuenta regresiva" style="background:#6e1f2b;padding:60px 20px;color:#f5ede1;display:flex;flex-direction:column;align-items:center;gap:28px">
+  <div data-reveal="" style="display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center">
+    <div style="font:400 11px 'Jost';letter-spacing:.36em;color:#e6cc98;text-transform:uppercase">Faltan</div>
+    <h2 style="margin:0;font:italic 500 38px/1.05 'Cormorant Garamond'">Cuenta Regresiva</h2>
+  </div>
+  <div data-reveal="" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;width:100%">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:14px 0;border:1px solid rgba(230,204,152,.55);border-radius:6px">
+      <div style="font:500 40px/1 'Cormorant Garamond'">{{ cdDays }}</div>
+      <div style="font:400 10px 'Jost';letter-spacing:.2em;color:#e6cc98">DÍAS</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:14px 0;border:1px solid rgba(230,204,152,.55);border-radius:6px">
+      <div style="font:500 40px/1 'Cormorant Garamond'">{{ cdHours }}</div>
+      <div style="font:400 10px 'Jost';letter-spacing:.2em;color:#e6cc98">HORAS</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:14px 0;border:1px solid rgba(230,204,152,.55);border-radius:6px">
+      <div style="font:500 40px/1 'Cormorant Garamond'">{{ cdMins }}</div>
+      <div style="font:400 10px 'Jost';letter-spacing:.2em;color:#e6cc98">MIN</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:14px 0;border:1px solid rgba(230,204,152,.55);border-radius:6px">
+      <div style="font:500 40px/1 'Cormorant Garamond'">{{ cdSecs }}</div>
+      <div style="font:400 10px 'Jost';letter-spacing:.2em;color:#e6cc98">SEG</div>
+    </div>
+  </div>
+  <div data-reveal="" style="width:100%;background:#fbf6ee;color:#2b1b1d;border-radius:8px;padding:24px 18px 20px;display:flex;flex-direction:column;gap:16px">
+    <div style="text-align:center;font:italic 500 26px 'Cormorant Garamond';color:#6e1f2b">Noviembre 2026</div>
+    <div style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));row-gap:6px;text-align:center">
+      <sc-for list="{{ weekDays }}" as="w" hint-placeholder-count="7">
+        <div style="font:500 10px 'Jost';letter-spacing:.12em;color:#8a6a3a;padding-bottom:6px">{{ w }}</div>
+      </sc-for>
+      <sc-for list="{{ calCells }}" as="c" hint-placeholder-count="35">
+        <div style="display:flex;align-items:center;justify-content:center;height:36px">
+          <div style="width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:{{ c.weight }} 14px 'Jost';background:{{ c.bg }};color:{{ c.color }}">{{ c.label }}</div>
+        </div>
+      </sc-for>
+    </div>
+    <a href="{{ calUrl }}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;min-height:46px;border-radius:999px;border:1px solid #6e1f2b;color:#6e1f2b;font:500 12px 'Jost';letter-spacing:.22em;text-transform:uppercase">Añadir al calendario</a>
+  </div>
+</section>
+
+<!-- RSVP -->
+<section data-screen-label="06 Confirmar" style="padding:60px 28px;background:#fbf6ee;display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center">
+  <div data-reveal="" style="display:flex;flex-direction:column;align-items:center;gap:12px">
+    <div style="font:400 11px 'Jost';letter-spacing:.36em;color:#8a6a3a;text-transform:uppercase">¿Nos acompañas?</div>
+    <h2 style="margin:0;font:italic 500 38px/1.05 'Cormorant Garamond';color:#6e1f2b">Confirma tu asistencia</h2>
+  </div>
+  <p data-reveal="" style="margin:0;max-width:320px;font:400 15px/1.7 'Jost';color:#5c4a46;text-wrap:pretty">Será un honor contar contigo. Confírmanos por WhatsApp en un solo paso.</p>
+  <button data-reveal="" onClick="{{ openRsvp }}" style="min-height:52px;padding:0 34px;border-radius:999px;border:none;background:#6e1f2b;color:#f5ede1;font:500 13px 'Jost';letter-spacing:.26em;text-transform:uppercase;cursor:pointer;box-shadow:0 10px 24px rgba(110,31,43,.28)">Confirmar asistencia</button>
+</section>
+
+<!-- VESTIMENTA -->
+<section data-screen-label="07 Vestimenta" style="background:#f3e9da;padding:56px 28px;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center">
+  <div data-reveal="" style="display:flex;flex-direction:column;align-items:center;gap:12px">
+    <div style="font:400 11px 'Jost';letter-spacing:.36em;color:#8a6a3a;text-transform:uppercase">Dress code</div>
+    <h2 style="margin:0;font:italic 500 38px/1.05 'Cormorant Garamond';color:#6e1f2b">Código de Vestimenta</h2>
+  </div>
+  <div data-reveal="" style="font:500 13px 'Jost';letter-spacing:.34em;color:#2b1b1d;padding:10px 22px;border-top:1px solid #b8955a;border-bottom:1px solid #b8955a">FORMAL</div>
+  <div data-reveal="" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;width:100%;max-width:340px">
+    <div style="display:flex;flex-direction:column;gap:4px">
+      <div style="font:500 10px 'Jost';letter-spacing:.26em;color:#8a6a3a">DAMAS</div>
+      <div style="font:500 18px/1.3 'Cormorant Garamond'">Vestido largo o de cóctel</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:4px">
+      <div style="font:500 10px 'Jost';letter-spacing:.26em;color:#8a6a3a">CABALLEROS</div>
+      <div style="font:500 18px/1.3 'Cormorant Garamond'">Terno y corbata</div>
+    </div>
+  </div>
+  <p data-reveal="" style="margin:0;font:italic 400 17px/1.5 'Cormorant Garamond';color:#5c4a46">El color blanco está reservado para la novia.</p>
+</section>
+
+<!-- PROGRAMA -->
+<section data-screen-label="08 Programa" style="padding:60px 28px;background:#fbf6ee;display:flex;flex-direction:column;align-items:center;gap:30px">
+  <div data-reveal="" style="display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center">
+    <div style="font:400 11px 'Jost';letter-spacing:.36em;color:#8a6a3a;text-transform:uppercase">Itinerario</div>
+    <h2 style="margin:0;font:italic 500 38px/1.05 'Cormorant Garamond';color:#6e1f2b">Programa del Día</h2>
+  </div>
+  <div style="position:relative;width:100%;max-width:340px;display:flex;flex-direction:column;gap:26px">
+    <div style="position:absolute;left:92px;top:8px;bottom:8px;width:1px;background:#d8c29a"></div>
+    <sc-for list="{{ program }}" as="ev" hint-placeholder-count="5">
+      <div data-reveal="" style="display:grid;grid-template-columns:76px 32px minmax(0,1fr);align-items:center">
+        <div style="font:500 13px 'Jost';letter-spacing:.08em;color:#6e1f2b;text-align:right">{{ ev.time }}</div>
+        <div style="display:flex;justify-content:center"><div style="width:11px;height:11px;transform:rotate(45deg);background:#fbf6ee;border:1px solid #b8955a;position:relative;z-index:1"></div></div>
+        <div style="font:italic 500 22px/1.2 'Cormorant Garamond';color:#2b1b1d">{{ ev.title }}</div>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<!-- REGALOS -->
+<sc-if value="{{ showGifts }}" hint-placeholder-val="{{ true }}">
+<section data-screen-label="09 Regalos" style="background:#4a121c;padding:60px 24px;color:#f5ede1;display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center">
+  <div data-reveal="" style="display:flex;flex-direction:column;align-items:center;gap:12px">
+    <div style="font:400 11px 'Jost';letter-spacing:.36em;color:#d9bd86;text-transform:uppercase">Un detalle</div>
+    <h2 style="margin:0;font:italic 500 38px/1.05 'Cormorant Garamond'">Caja de Regalos</h2>
+  </div>
+  <p data-reveal="" style="margin:0;max-width:320px;font:400 15px/1.7 'Jost';color:#ecdcc4;text-wrap:pretty">Tu presencia es nuestro mejor regalo. Si deseas tener un detalle con nosotros, puedes hacerlo aquí.</p>
+  <div onClick="{{ toggleGift }}" style="position:relative;width:150px;height:150px;cursor:pointer;margin-top:56px">
+    <div style="position:absolute;left:12px;right:12px;bottom:0;height:98px;background:#f1e6d4;border-radius:3px;box-shadow:0 16px 30px rgba(0,0,0,.35)"></div>
+    <div style="position:absolute;left:50%;margin-left:-9px;bottom:0;width:18px;height:98px;background:#b8955a"></div>
+    <div style="position:absolute;left:0;right:0;top:28px;height:28px;background:#e7d7bb;border-radius:3px;transform:{{ lidTransform }};transition:transform .6s cubic-bezier(.3,1.4,.5,1);box-shadow:0 4px 8px rgba(0,0,0,.2)">
+      <div style="position:absolute;left:50%;margin-left:-9px;top:0;width:18px;height:28px;background:#c9a86b"></div>
+      <div style="position:absolute;left:50%;top:-16px;width:22px;height:22px;margin-left:-24px;border:3px solid #c9a86b;border-radius:50% 50% 0 50%;transform:rotate(15deg)"></div>
+      <div style="position:absolute;left:50%;top:-16px;width:22px;height:22px;margin-left:2px;border:3px solid #c9a86b;border-radius:50% 50% 50% 0;transform:rotate(-15deg)"></div>
+    </div>
+  </div>
+  <div style="font:500 11px 'Jost';letter-spacing:.3em;color:#d9bd86;text-transform:uppercase">{{ giftHint }}</div>
+  <sc-if value="{{ giftOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="width:100%;max-width:320px;background:#fbf6ee;color:#2b1b1d;border-radius:8px;padding:22px;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <div style="font:500 10px 'Jost';letter-spacing:.28em;color:#8a6a3a">NOVIA</div>
+      <div style="font:italic 500 24px 'Cormorant Garamond';color:#6e1f2b">Cleny Alarcón</div>
+      <div style="width:220px;height:220px">
+        <image-slot id="qr-cleny" shape="rounded" radius="6" fit="contain" placeholder="Arrastra aquí el QR (Yape / Plin)"></image-slot>
+      </div>
+      <div style="font:400 12px/1.6 'Jost';color:#5c4a46">Escanea el código desde tu app de pagos.</div>
+    </div>
+  </sc-if>
+</section>
+</sc-if>
+
+<!-- CIERRE -->
+<section data-screen-label="10 Cierre" style="position:relative;min-height:560px;overflow:hidden;display:flex;align-items:flex-end;background:#2a1416">
+  <img src="img/hero2.jpg" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%">
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(42,20,22,0) 30%,rgba(42,20,22,.85) 75%,#2a1416 100%)"></div>
+  <div style="position:relative;width:100%;padding:0 30px 46px;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;color:#f5ede1">
+    <p data-reveal="" style="margin:0;max-width:320px;font:italic 400 22px/1.5 'Cormorant Garamond';text-wrap:pretty">Su presencia será el mejor regalo que podríamos recibir.</p>
+    <div data-reveal="" style="font:400 52px/1.1 'Pinyon Script'">David &amp; Cleny</div>
+    <div style="font:400 12px 'Jost';letter-spacing:.34em;color:#d9bd86">28 · 11 · 2026</div>
+  </div>
+</section>
+
+</div>
+
+<!-- LIGHTBOX -->
+<sc-if value="{{ lbOpen }}" hint-placeholder-val="{{ false }}">
+<div onTouchStart="{{ lbTouchStart }}" onTouchEnd="{{ lbTouchEnd }}" style="position:fixed;inset:0;z-index:60;background:rgba(18,6,9,.97);display:flex;flex-direction:column">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 12px 0">
+    <div style="font:400 13px 'Jost';letter-spacing:.2em;color:#d9bd86;padding-left:8px">{{ lbCounter }}</div>
+    <button onClick="{{ closeLb }}" aria-label="Cerrar" style="width:44px;height:44px;border:none;background:transparent;color:#f5ede1;font:300 30px/1 'Jost';cursor:pointer">×</button>
+  </div>
+  <div style="flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:12px">
+    <img src="{{ lbSrc }}" alt="" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:4px">
+  </div>
+  <div style="display:flex;justify-content:center;gap:28px;padding:0 0 26px">
+    <button onClick="{{ lbPrev }}" aria-label="Anterior" style="width:48px;height:48px;border-radius:50%;border:1px solid #d9bd86;background:transparent;color:#f5ede1;font:400 24px/1 'Cormorant Garamond';cursor:pointer">‹</button>
+    <button onClick="{{ lbNext }}" aria-label="Siguiente" style="width:48px;height:48px;border-radius:50%;border:1px solid #d9bd86;background:transparent;color:#f5ede1;font:400 24px/1 'Cormorant Garamond';cursor:pointer">›</button>
+  </div>
+</div>
+</sc-if>
+
+<!-- RSVP SHEET -->
+<sc-if value="{{ rsvpOpen }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ closeRsvp }}" style="position:fixed;inset:0;z-index:70;background:rgba(30,10,14,.6);display:flex;align-items:flex-end;justify-content:center">
+  <div onClick="{{ stop }}" style="width:100%;max-width:460px;background:#fbf6ee;border-radius:18px 18px 0 0;padding:14px 24px 30px;display:flex;flex-direction:column;gap:18px;max-height:92vh;overflow-y:auto">
+    <div style="width:44px;height:4px;border-radius:2px;background:#d8c29a;margin:0 auto"></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center">
+      <div style="font:italic 500 30px 'Cormorant Garamond';color:#6e1f2b">Confirmar asistencia</div>
+      <div style="font:400 13px 'Jost';color:#5c4a46">Boda de David &amp; Cleny · 28 nov 2026</div>
+    </div>
+    <label style="display:flex;flex-direction:column;gap:6px">
+      <span style="font:500 10px 'Jost';letter-spacing:.24em;color:#8a6a3a">NOMBRE COMPLETO</span>
+      <input value="{{ rName }}" onChange="{{ onName }}" placeholder="Tu nombre" style="height:48px;border:1px solid #d8c29a;border-radius:8px;background:#fff;padding:0 14px;font:400 16px 'Jost';color:#2b1b1d;outline:none">
+    </label>
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px">
+      <button onClick="{{ setYes }}" style="min-height:48px;border-radius:8px;border:1px solid #6e1f2b;background:{{ yesBg }};color:{{ yesColor }};font:500 13px 'Jost';cursor:pointer">Asistiré</button>
+      <button onClick="{{ setNo }}" style="min-height:48px;border-radius:8px;border:1px solid #6e1f2b;background:{{ noBg }};color:{{ noColor }};font:500 13px 'Jost';cursor:pointer">No podré asistir</button>
+    </div>
+    <sc-if value="{{ attending }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <span style="font:500 10px 'Jost';letter-spacing:.24em;color:#8a6a3a">N.º DE PERSONAS</span>
+        <div style="display:flex;align-items:center;gap:14px">
+          <button onClick="{{ decGuests }}" aria-label="Menos" style="width:44px;height:44px;border-radius:50%;border:1px solid #d8c29a;background:#fff;color:#6e1f2b;font:400 22px 'Jost';cursor:pointer">−</button>
+          <div style="font:500 26px 'Cormorant Garamond';min-width:20px;text-align:center">{{ rGuests }}</div>
+          <button onClick="{{ incGuests }}" aria-label="Más" style="width:44px;height:44px;border-radius:50%;border:1px solid #d8c29a;background:#fff;color:#6e1f2b;font:400 22px 'Jost';cursor:pointer">+</button>
+        </div>
+      </div>
+    </sc-if>
+    <label style="display:flex;flex-direction:column;gap:6px">
+      <span style="font:500 10px 'Jost';letter-spacing:.24em;color:#8a6a3a">MENSAJE PARA LOS NOVIOS (OPCIONAL)</span>
+      <textarea value="{{ rMsg }}" onChange="{{ onMsg }}" rows="3" placeholder="Escribe tus buenos deseos…" style="border:1px solid #d8c29a;border-radius:8px;background:#fff;padding:12px 14px;font:400 16px 'Jost';color:#2b1b1d;outline:none;resize:none"></textarea>
+    </label>
+    <sc-if value="{{ nameMissing }}" hint-placeholder-val="{{ false }}">
+      <div style="font:400 13px 'Jost';color:#a12a3a;text-align:center">Por favor escribe tu nombre.</div>
+    </sc-if>
+    <button onClick="{{ sendRsvp }}" style="min-height:52px;border-radius:999px;border:none;background:#6e1f2b;color:#f5ede1;font:500 13px 'Jost';letter-spacing:.22em;text-transform:uppercase;cursor:pointer">Enviar por WhatsApp</button>
+  </div>
+</div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;400px&quot;,&quot;height&quot;:&quot;820px&quot;},&quot;whatsapp&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Confirmación&quot;},&quot;showIntro&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Secciones&quot;},&quot;showGifts&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Secciones&quot;}}">
+class Component extends DCLogic {
+  state = { stage: 'closed', now: Date.now(), idx: 0, lb: -1, giftOpen: false, rsvp: false, rName: '', attend: 'si', guests: 1, rMsg: '', tried: false };
+  rootRef = React.createRef();
+  carRef = React.createRef();
+  thumbRef = React.createRef();
+  srcs = ['img/hero1.jpg', 'img/hero2.jpg', 'img/hero3.jpg'].concat(Array.from({ length: 28 }, (_, i) => 'img/p' + String(i + 4).padStart(2, '0') + '.jpg'));
+  target = Date.UTC(2026, 10, 28, 19, 30);
+
+  componentDidMount() {
+    this.timer = setInterval(() => this.setState({ now: Date.now() }), 1000);
+    this.setupReveal();
+  }
+  componentWillUnmount() {
+    clearInterval(this.timer);
+    this.io && this.io.disconnect();
+    document.body.style.overflow = '';
+  }
+  componentDidUpdate() {
+    const lock = this.state.lb >= 0 || this.state.rsvp || (this.showIntro() && this.state.stage !== 'gone');
+    document.body.style.overflow = lock ? 'hidden' : '';
+  }
+  showIntro() { return this.props.showIntro ?? true; }
+
+  setupReveal() {
+    const root = this.rootRef.current;
+    if (!root || !('IntersectionObserver' in window)) return;
+    this.io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'none';
+          this.io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    const watch = () => root.querySelectorAll('[data-reveal]:not([data-rv])').forEach((el) => {
+      el.setAttribute('data-rv', '');
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(22px)';
+      el.style.transition = 'opacity .9s ease, transform .9s cubic-bezier(.2,.8,.2,1)';
+      this.io.observe(el);
+    });
+    watch();
+    setTimeout(watch, 600);
+  }
+
+  openEnvelope = () => {
+    if (this.state.stage !== 'closed') return;
+    this.setState({ stage: 'opening' });
+    setTimeout(() => this.setState({ stage: 'fading' }), 1700);
+    setTimeout(() => { this.setState({ stage: 'gone' }); window.scrollTo(0, 0); }, 2500);
+  };
+
+  slides() { return this.carRef.current ? this.carRef.current.querySelectorAll('[data-slide]') : []; }
+  goTo = (i) => {
+    const el = this.carRef.current, s = this.slides();
+    if (!el || !s.length) return;
+    i = (i + s.length) % s.length;
+    const c = s[i];
+    el.scrollTo({ left: c.offsetLeft - (el.clientWidth - c.offsetWidth) / 2, behavior: 'smooth' });
+  };
+  onCarScroll = () => {
+    const el = this.carRef.current, s = this.slides();
+    if (!el || !s.length) return;
+    const center = el.scrollLeft + el.clientWidth / 2;
+    let best = 0, bd = Infinity;
+    s.forEach((c, i) => { const d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - center); if (d < bd) { bd = d; best = i; } });
+    if (best !== this.state.idx) {
+      this.setState({ idx: best });
+      const t = this.thumbRef.current;
+      const th = t && t.querySelectorAll('[data-thumb]')[best];
+      if (th) t.scrollTo({ left: th.offsetLeft - (t.clientWidth - th.offsetWidth) / 2, behavior: 'smooth' });
+    }
+  };
+
+  lbStep = (d) => this.setState((s) => ({ lb: (s.lb + d + this.srcs.length) % this.srcs.length }));
+
+  sendRsvp = () => {
+    const { rName, attend, guests, rMsg } = this.state;
+    if (!rName.trim()) { this.setState({ tried: true }); return; }
+    const txt = attend === 'si'
+      ? `Hola, soy ${rName.trim()}. Confirmo mi asistencia a la boda de David & Cleny (${guests} persona${guests > 1 ? 's' : ''}).`
+      : `Hola, soy ${rName.trim()}. Lamentablemente no podré asistir a la boda de David & Cleny.`;
+    const full = txt + (rMsg.trim() ? `\n\n${rMsg.trim()}` : '');
+    let num = String(this.props.whatsapp ?? '').replace(/\D/g, '');
+    if (num.length === 9) num = '51' + num;
+    window.open(`https://wa.me/${num}?text=${encodeURIComponent(full)}`, '_blank');
+    this.setState({ rsvp: false });
+  };
+
+  pad(n) { return String(n).padStart(2, '0'); }
+
+  renderVals() {
+    const st = this.state;
+    const closed = st.stage === 'closed';
+    const diff = Math.max(0, this.target - st.now);
+    const d = Math.floor(diff / 864e5), h = Math.floor(diff / 36e5) % 24, m = Math.floor(diff / 6e4) % 60, sec = Math.floor(diff / 1e3) % 60;
+
+    const offset = (new Date(2026, 10, 1).getDay() + 6) % 7;
+    const calCells = [];
+    for (let i = 0; i < offset; i++) calCells.push({ label: '', bg: 'transparent', color: '#2b1b1d', weight: 400 });
+    for (let day = 1; day <= 30; day++) {
+      const hit = day === 28;
+      calCells.push({ label: day, bg: hit ? '#6e1f2b' : 'transparent', color: hit ? '#f5ede1' : '#2b1b1d', weight: hit ? 500 : 400 });
+    }
+
+    const photos = this.srcs.map((src, i) => ({
+      src,
+      open: () => this.setState({ lb: i }),
+      go: () => this.goTo(i),
+      op: i === st.idx ? 1 : 0.5,
+      oc: i === st.idx ? '#d9bd86' : 'transparent',
+    }));
+
+    const calUrl = 'https://www.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent('Boda de David & Cleny') +
+      '&dates=20261128T193000Z%2F20261129T050000Z&ctz=America%2FLima&details=' +
+      encodeURIComponent('Ceremonia: Templo de Almudena, 2:30 PM. Recepción: Salón Multiusos Pillao Matao, 5:00 PM.') +
+      '&location=' + encodeURIComponent('Salón Multiusos Pillao Matao');
+
+    return {
+      rootRef: this.rootRef, carRef: this.carRef, thumbRef: this.thumbRef,
+      showOverlay: this.showIntro() && st.stage !== 'gone',
+      openEnvelope: this.openEnvelope,
+      ovOpacity: st.stage === 'fading' ? 0 : 1,
+      flapTransform: closed ? 'rotateX(0deg)' : 'rotateX(180deg)',
+      flapZ: closed ? 4 : 1,
+      cardTransform: closed ? 'translateY(0)' : 'translateY(-110px)',
+      sealOpacity: closed ? 1 : 0,
+
+      photos, onCarScroll: this.onCarScroll,
+      prevSlide: () => this.goTo(st.idx - 1), nextSlide: () => this.goTo(st.idx + 1),
+      counter: `${this.pad(st.idx + 1)} / ${this.srcs.length}`,
+
+      lbOpen: st.lb >= 0, lbSrc: st.lb >= 0 ? this.srcs[st.lb] : '',
+      lbCounter: `${st.lb + 1} / ${this.srcs.length}`,
+      closeLb: () => this.setState({ lb: -1 }),
+      lbPrev: () => this.lbStep(-1), lbNext: () => this.lbStep(1),
+      lbTouchStart: (e) => { this.tx = e.touches[0].clientX; },
+      lbTouchEnd: (e) => { const dx = e.changedTouches[0].clientX - (this.tx ?? 0); if (Math.abs(dx) > 40) this.lbStep(dx < 0 ? 1 : -1); },
+
+      cdDays: d, cdHours: this.pad(h), cdMins: this.pad(m), cdSecs: this.pad(sec),
+      weekDays: ['LU', 'MA', 'MI', 'JU', 'VI', 'SÁ', 'DO'], calCells, calUrl,
+
+      program: [
+        { time: '5:30 PM', title: 'Bienvenida' },
+        { time: '6:30 PM', title: 'Recepción' },
+        { time: '6:45 PM', title: 'Brindis y pastel' },
+        { time: '8:00 PM', title: 'Plato principal' },
+        { time: '9:00 PM', title: 'Hora loca' },
+      ],
+
+      showGifts: this.props.showGifts ?? true,
+      giftOpen: st.giftOpen,
+      toggleGift: () => this.setState((s) => ({ giftOpen: !s.giftOpen })),
+      lidTransform: st.giftOpen ? 'translate(18px,-46px) rotate(18deg)' : 'none',
+      giftHint: st.giftOpen ? 'Toca para cerrar' : 'Toca para abrir',
+
+      rsvpOpen: st.rsvp,
+      openRsvp: () => this.setState({ rsvp: true, tried: false }),
+      closeRsvp: () => this.setState({ rsvp: false }),
+      stop: (e) => e.stopPropagation(),
+      rName: st.rName, rMsg: st.rMsg, rGuests: st.guests,
+      onName: (e) => this.setState({ rName: e.target.value }),
+      onMsg: (e) => this.setState({ rMsg: e.target.value }),
+      attending: st.attend === 'si',
+      setYes: () => this.setState({ attend: 'si' }), setNo: () => this.setState({ attend: 'no' }),
+      yesBg: st.attend === 'si' ? '#6e1f2b' : '#fff', yesColor: st.attend === 'si' ? '#f5ede1' : '#6e1f2b',
+      noBg: st.attend === 'no' ? '#6e1f2b' : '#fff', noColor: st.attend === 'no' ? '#f5ede1' : '#6e1f2b',
+      decGuests: () => this.setState((s) => ({ guests: Math.max(1, s.guests - 1) })),
+      incGuests: () => this.setState((s) => ({ guests: Math.min(10, s.guests + 1) })),
+      nameMissing: st.tried && !st.rName.trim(),
+      sendRsvp: this.sendRsvp,
+    };
+  }
+}
+</script>
+</body>
+</html>
