@@ -10,11 +10,28 @@
 <helmet>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#4a121c">
+<meta name="ext-resource-dependency" content="./img/hero3.jpg" data-resource-id="g0">
+<meta name="ext-resource-dependency" content="./img/p04.jpg" data-resource-id="g1">
+<meta name="ext-resource-dependency" content="./img/p05.jpg" data-resource-id="g2">
+<meta name="ext-resource-dependency" content="./img/p06.jpg" data-resource-id="g3">
+<meta name="ext-resource-dependency" content="./img/p08.jpg" data-resource-id="g4">
+<meta name="ext-resource-dependency" content="./img/p09.jpg" data-resource-id="g5">
+<meta name="ext-resource-dependency" content="./img/p13.jpg" data-resource-id="g6">
+<meta name="ext-resource-dependency" content="./img/p15.jpg" data-resource-id="g7">
+<meta name="ext-resource-dependency" content="./img/p17.jpg" data-resource-id="g8">
+<meta name="ext-resource-dependency" content="./img/p19.jpg" data-resource-id="g9">
+<meta name="ext-resource-dependency" content="./img/p20.jpg" data-resource-id="g10">
+<meta name="ext-resource-dependency" content="./img/p22.jpg" data-resource-id="g11">
+<meta name="ext-resource-dependency" content="./img/p23.jpg" data-resource-id="g12">
+<meta name="ext-resource-dependency" content="./img/p24.jpg" data-resource-id="g13">
+<meta name="ext-resource-dependency" content="./img/p27.jpg" data-resource-id="g14">
+<meta name="ext-resource-dependency" content="./img/p29.jpg" data-resource-id="g15">
 <title>David &amp; Cleny · Nuestra Boda</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Pinyon+Script&amp;family=Jost:wght@300;400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Pinyon+Script&amp;family=Great+Vibes&amp;family=Ballet:opsz@16..72&amp;family=Playball&amp;family=Alex+Brush&amp;family=Parisienne&amp;family=Jost:wght@300;400;500&amp;display=swap" rel="stylesheet">
 <script src="./image-slot.js"></script>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#4a121c"></rect><circle cx="50" cy="50" r="20" fill="none" stroke="#d9bd86" stroke-width="2"></circle><text x="50" y="56" font-family="serif" font-size="16" fill="#f5ede1" text-anchor="middle">D&amp;C</text></svg></template>
 <style>
 html,body{margin:0;padding:0;background:#2a1416;-webkit-tap-highlight-color:transparent}
 *{box-sizing:border-box}
@@ -23,6 +40,8 @@ a:hover{color:#4a121c}
 [data-noscrollbar]::-webkit-scrollbar{display:none}
 @keyframes dcPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.06);opacity:.85}}
 @keyframes dcFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+@keyframes dcFall{0%{transform:translate3d(0,-8vh,0) rotate(0deg);opacity:0}10%{opacity:var(--o)}50%{transform:translate3d(var(--dx),50vh,0) rotate(var(--r))}90%{opacity:var(--o)}100%{transform:translate3d(0,108vh,0) rotate(calc(var(--r) * -1));opacity:0}}
+@keyframes dcBeat{0%,100%{transform:scale(1)}15%{transform:scale(1.18)}30%{transform:scale(1)}45%{transform:scale(1.12)}}
 </style>
 </helmet>
 
@@ -45,11 +64,11 @@ a:hover{color:#4a121c}
     <div style="position:absolute;inset:0;z-index:3;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.05));border-radius:4px;clip-path:polygon(0 100%,50% 50%,100% 100%)"></div>
     <div style="position:absolute;left:0;right:0;top:0;height:118px;z-index:{{ flapZ }};background:#e3d3ba;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top center;transform:{{ flapTransform }};transition:transform .7s ease;border-radius:4px 4px 0 0"></div>
     <div style="position:absolute;left:50%;top:86px;width:66px;height:66px;margin-left:-33px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#9a3343,#5c1420);border:2px solid #c9a86b;z-index:6;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.35);opacity:{{ sealOpacity }};transition:opacity .35s ease">
-      <span style="font:400 26px 'Pinyon Script';color:#f3dfb4;line-height:1;margin-top:4px">D&amp;C</span>
+      <span style="font:400 26px var(--script,'Great Vibes');color:#f3dfb4;line-height:1;margin-top:4px">D&amp;C</span>
     </div>
   </div>
   <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
-    <div style="font:400 54px/1.1 'Pinyon Script';color:#f5ede1">David &amp; Cleny</div>
+    <div style="font:400 54px/1.1 var(--script,'Great Vibes');color:#f5ede1">David &amp; Cleny</div>
     <div style="font:400 13px 'Jost';letter-spacing:.3em;color:#d9bd86">28 · 11 · 2026</div>
   </div>
   <div style="padding:13px 28px;border:1px solid #d9bd86;border-radius:999px;font:500 12px 'Jost';letter-spacing:.28em;color:#f5ede1;text-transform:uppercase;animation:dcPulse 2.2s ease-in-out infinite">Toca para abrir</div>
@@ -62,9 +81,9 @@ a:hover{color:#4a121c}
   <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(43,10,16,.35) 0%,rgba(43,10,16,0) 28%,rgba(43,10,16,0) 45%,rgba(60,14,22,.82) 78%,#4a121c 100%)"></div>
   <div style="position:absolute;top:28px;left:0;right:0;text-align:center;font:400 12px 'Jost';letter-spacing:.42em;color:#f5ede1;text-transform:uppercase">Nuestra Boda</div>
   <div style="position:absolute;left:0;right:0;bottom:56px;display:flex;flex-direction:column;align-items:center;gap:4px;color:#f5ede1;padding:0 20px">
-    <div style="font:400 76px/0.95 'Pinyon Script'">David</div>
+    <div style="font:400 76px/0.95 var(--script,'Great Vibes')">David</div>
     <div style="font:italic 400 30px/1 'Cormorant Garamond';color:#e6cc98">&amp;</div>
-    <div style="font:400 76px/1.05 'Pinyon Script'">Cleny</div>
+    <div style="font:400 76px/1.05 var(--script,'Great Vibes')">Cleny</div>
     <div style="display:flex;align-items:center;gap:12px;margin-top:14px">
       <div style="width:36px;height:1px;background:#d9bd86"></div>
       <div style="font:400 13px 'Jost';letter-spacing:.32em">28 · NOVIEMBRE · 2026</div>
@@ -103,14 +122,14 @@ a:hover{color:#4a121c}
       </div>
     </div>
     <div data-reveal="" style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:22px 0;border-top:1px solid #ead9bd;border-bottom:1px solid #ead9bd;width:100%">
-      <div style="font:400 38px/1.15 'Pinyon Script';color:#6e1f2b">David Vargas Salas</div>
+      <div style="font:400 58px/1.1 var(--script,'Great Vibes');color:#6e1f2b">David</div>
       <div style="font:italic 400 24px/1 'Cormorant Garamond';color:#b8955a">&amp;</div>
-      <div style="font:400 38px/1.15 'Pinyon Script';color:#6e1f2b;text-wrap:balance">Cleny Dayana Alarcón Orihuela</div>
+      <div style="font:400 58px/1.1 var(--script,'Great Vibes');color:#6e1f2b">Cleny</div>
     </div>
     <div data-reveal="" style="display:flex;flex-direction:column;gap:8px;align-items:center">
       <div style="font:500 10px 'Jost';letter-spacing:.28em;color:#8a6a3a;text-transform:uppercase">Nuestros padrinos</div>
-      <div style="font:500 18px/1.35 'Cormorant Garamond';color:#2b1b1d">Daniel &amp; Aurelia Choqque</div>
-      <div style="font:500 18px/1.35 'Cormorant Garamond';color:#2b1b1d">Francisco Ochoa Becerra &amp; Cleofe Moreano</div>
+      <div style="font:500 18px/1.35 'Cormorant Garamond';color:#2b1b1d">Daniel Condori C. &amp; Aurelia Choqque Q.</div>
+      <div style="font:500 18px/1.35 'Cormorant Garamond';color:#2b1b1d">Francisco Ochoa .B &amp; Cleofe Moreano P.</div>
     </div>
     <div data-reveal="" style="display:flex;flex-direction:column;align-items:center;gap:14px;width:100%">
       <div style="font:500 12px 'Jost';letter-spacing:.3em;color:#6e1f2b">A LAS 2:30 PM</div>
@@ -234,7 +253,7 @@ a:hover{color:#4a121c}
 <!-- VESTIMENTA -->
 <section data-screen-label="07 Vestimenta" style="background:#f3e9da;padding:56px 28px;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center">
   <div data-reveal="" style="display:flex;flex-direction:column;align-items:center;gap:12px">
-    <div style="font:400 11px 'Jost';letter-spacing:.36em;color:#8a6a3a;text-transform:uppercase">Dress code</div>
+    
     <h2 style="margin:0;font:italic 500 38px/1.05 'Cormorant Garamond';color:#6e1f2b">Código de Vestimenta</h2>
   </div>
   <div data-reveal="" style="font:500 13px 'Jost';letter-spacing:.34em;color:#2b1b1d;padding:10px 22px;border-top:1px solid #b8955a;border-bottom:1px solid #b8955a">FORMAL</div>
@@ -252,22 +271,7 @@ a:hover{color:#4a121c}
 </section>
 
 <!-- PROGRAMA -->
-<section data-screen-label="08 Programa" style="padding:60px 28px;background:#fbf6ee;display:flex;flex-direction:column;align-items:center;gap:30px">
-  <div data-reveal="" style="display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center">
-    <div style="font:400 11px 'Jost';letter-spacing:.36em;color:#8a6a3a;text-transform:uppercase">Itinerario</div>
-    <h2 style="margin:0;font:italic 500 38px/1.05 'Cormorant Garamond';color:#6e1f2b">Programa del Día</h2>
-  </div>
-  <div style="position:relative;width:100%;max-width:340px;display:flex;flex-direction:column;gap:26px">
-    <div style="position:absolute;left:92px;top:8px;bottom:8px;width:1px;background:#d8c29a"></div>
-    <sc-for list="{{ program }}" as="ev" hint-placeholder-count="5">
-      <div data-reveal="" style="display:grid;grid-template-columns:76px 32px minmax(0,1fr);align-items:center">
-        <div style="font:500 13px 'Jost';letter-spacing:.08em;color:#6e1f2b;text-align:right">{{ ev.time }}</div>
-        <div style="display:flex;justify-content:center"><div style="width:11px;height:11px;transform:rotate(45deg);background:#fbf6ee;border:1px solid #b8955a;position:relative;z-index:1"></div></div>
-        <div style="font:italic 500 22px/1.2 'Cormorant Garamond';color:#2b1b1d">{{ ev.title }}</div>
-      </div>
-    </sc-for>
-  </div>
-</section>
+
 
 <!-- REGALOS -->
 <sc-if value="{{ showGifts }}" hint-placeholder-val="{{ true }}">
@@ -291,10 +295,8 @@ a:hover{color:#4a121c}
     <div style="width:100%;max-width:320px;background:#fbf6ee;color:#2b1b1d;border-radius:8px;padding:22px;display:flex;flex-direction:column;align-items:center;gap:12px">
       <div style="font:500 10px 'Jost';letter-spacing:.28em;color:#8a6a3a">NOVIA</div>
       <div style="font:italic 500 24px 'Cormorant Garamond';color:#6e1f2b">Cleny Alarcón</div>
-      <div style="width:220px;height:220px">
-        <image-slot id="qr-cleny" shape="rounded" radius="6" fit="contain" placeholder="Arrastra aquí el QR (Yape / Plin)"></image-slot>
-      </div>
-      <div style="font:400 12px/1.6 'Jost';color:#5c4a46">Escanea el código desde tu app de pagos.</div>
+      <img src="img/yape-qr.png" alt="QR Yape de Cleny Dayana Alarcón Orihuela" style="width:100%;max-width:250px;height:auto;display:block;border-radius:10px">
+      <div style="font:400 12px/1.6 'Jost';color:#5c4a46">Escanea el código desde tu app Yape.</div>
     </div>
   </sc-if>
 </section>
@@ -306,12 +308,14 @@ a:hover{color:#4a121c}
   <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(42,20,22,0) 30%,rgba(42,20,22,.85) 75%,#2a1416 100%)"></div>
   <div style="position:relative;width:100%;padding:0 30px 46px;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;color:#f5ede1">
     <p data-reveal="" style="margin:0;max-width:320px;font:italic 400 22px/1.5 'Cormorant Garamond';text-wrap:pretty">Su presencia será el mejor regalo que podríamos recibir.</p>
-    <div data-reveal="" style="font:400 52px/1.1 'Pinyon Script'">David &amp; Cleny</div>
+    <div data-reveal="" style="font:400 52px/1.1 var(--script,'Great Vibes')">David &amp; Cleny</div>
     <div style="font:400 12px 'Jost';letter-spacing:.34em;color:#d9bd86">28 · 11 · 2026</div>
   </div>
 </section>
 
 </div>
+
+{{ heartsEl }}
 
 <!-- LIGHTBOX -->
 <sc-if value="{{ lbOpen }}" hint-placeholder-val="{{ false }}">
@@ -340,23 +344,13 @@ a:hover{color:#4a121c}
       <div style="font:400 13px 'Jost';color:#5c4a46">Boda de David &amp; Cleny · 28 nov 2026</div>
     </div>
     <label style="display:flex;flex-direction:column;gap:6px">
-      <span style="font:500 10px 'Jost';letter-spacing:.24em;color:#8a6a3a">NOMBRE COMPLETO</span>
+      <span style="font:500 10px 'Jost';letter-spacing:.24em;color:#8a6a3a">NOMBRE</span>
       <input value="{{ rName }}" onChange="{{ onName }}" placeholder="Tu nombre" style="height:48px;border:1px solid #d8c29a;border-radius:8px;background:#fff;padding:0 14px;font:400 16px 'Jost';color:#2b1b1d;outline:none">
     </label>
     <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px">
       <button onClick="{{ setYes }}" style="min-height:48px;border-radius:8px;border:1px solid #6e1f2b;background:{{ yesBg }};color:{{ yesColor }};font:500 13px 'Jost';cursor:pointer">Asistiré</button>
       <button onClick="{{ setNo }}" style="min-height:48px;border-radius:8px;border:1px solid #6e1f2b;background:{{ noBg }};color:{{ noColor }};font:500 13px 'Jost';cursor:pointer">No podré asistir</button>
     </div>
-    <sc-if value="{{ attending }}" hint-placeholder-val="{{ true }}">
-      <div style="display:flex;align-items:center;justify-content:space-between">
-        <span style="font:500 10px 'Jost';letter-spacing:.24em;color:#8a6a3a">N.º DE PERSONAS</span>
-        <div style="display:flex;align-items:center;gap:14px">
-          <button onClick="{{ decGuests }}" aria-label="Menos" style="width:44px;height:44px;border-radius:50%;border:1px solid #d8c29a;background:#fff;color:#6e1f2b;font:400 22px 'Jost';cursor:pointer">−</button>
-          <div style="font:500 26px 'Cormorant Garamond';min-width:20px;text-align:center">{{ rGuests }}</div>
-          <button onClick="{{ incGuests }}" aria-label="Más" style="width:44px;height:44px;border-radius:50%;border:1px solid #d8c29a;background:#fff;color:#6e1f2b;font:400 22px 'Jost';cursor:pointer">+</button>
-        </div>
-      </div>
-    </sc-if>
     <label style="display:flex;flex-direction:column;gap:6px">
       <span style="font:500 10px 'Jost';letter-spacing:.24em;color:#8a6a3a">MENSAJE PARA LOS NOVIOS (OPCIONAL)</span>
       <textarea value="{{ rMsg }}" onChange="{{ onMsg }}" rows="3" placeholder="Escribe tus buenos deseos…" style="border:1px solid #d8c29a;border-radius:8px;background:#fff;padding:12px 14px;font:400 16px 'Jost';color:#2b1b1d;outline:none;resize:none"></textarea>
@@ -371,16 +365,32 @@ a:hover{color:#4a121c}
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;400px&quot;,&quot;height&quot;:&quot;820px&quot;},&quot;whatsapp&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Confirmación&quot;},&quot;showIntro&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Secciones&quot;},&quot;showGifts&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Secciones&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;400px&quot;,&quot;height&quot;:&quot;820px&quot;},&quot;fuente&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Great Vibes&quot;,&quot;Ballet&quot;,&quot;Playball&quot;,&quot;Alex Brush&quot;,&quot;Parisienne&quot;,&quot;Pinyon Script&quot;],&quot;default&quot;:&quot;Great Vibes&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Estilo&quot;},&quot;whatsapp&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Confirmación&quot;},&quot;showIntro&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Secciones&quot;},&quot;showHearts&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Secciones&quot;},&quot;showGifts&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Secciones&quot;}}">
 class Component extends DCLogic {
   state = { stage: 'closed', now: Date.now(), idx: 0, lb: -1, giftOpen: false, rsvp: false, rName: '', attend: 'si', guests: 1, rMsg: '', tried: false };
   rootRef = React.createRef();
   carRef = React.createRef();
   thumbRef = React.createRef();
-  srcs = ['img/hero1.jpg', 'img/hero2.jpg', 'img/hero3.jpg'].concat(Array.from({ length: 28 }, (_, i) => 'img/p' + String(i + 4).padStart(2, '0') + '.jpg'));
+  srcs = ['img/hero3.jpg','img/p04.jpg','img/p05.jpg','img/p06.jpg','img/p08.jpg','img/p09.jpg','img/p13.jpg','img/p15.jpg','img/p17.jpg','img/p19.jpg','img/p20.jpg','img/p22.jpg','img/p23.jpg','img/p24.jpg','img/p27.jpg','img/p29.jpg'].map((s, i) => (window.__resources && window.__resources['g' + i]) || s);
   target = Date.UTC(2026, 10, 28, 19, 30);
+  hearts = Array.from({ length: 22 }, (_, i) => {
+    const cols = ['#d8657f', '#f2a7b8', '#fdb49b', '#b783dc', '#a9c8ec', '#e98aa0'];
+    const r = (a, b) => a + Math.random() * (b - a);
+    return { left: r(0, 96), size: r(11, 24), dur: r(8, 15), delay: -r(0, 15), dx: r(-40, 40), rot: r(-35, 35), op: r(0.55, 0.9), color: cols[i % cols.length] };
+  });
+  heartsNode() {
+    return React.createElement('div', { 'aria-hidden': true, style: { position: 'fixed', top: 0, bottom: 0, left: '50%', transform: 'translateX(-50%)', width: '100%', maxWidth: 460, pointerEvents: 'none', zIndex: 40, overflow: 'hidden' } },
+      this.hearts.map((h, i) => React.createElement('span', { key: i, style: {
+        position: 'absolute', top: 0, left: h.left + '%', fontSize: h.size, lineHeight: 1, color: h.color, fontFamily: 'serif',
+        textShadow: '0 2px 6px rgba(120,20,40,.18)', '--dx': h.dx + 'px', '--r': h.rot + 'deg', '--o': h.op,
+        animation: `dcFall ${h.dur}s linear ${h.delay}s infinite`, willChange: 'transform',
+      } }, '♥')));
+  }
 
+  fonts = { 'Great Vibes': "'Great Vibes'", 'Ballet': "'Ballet'", 'Playball': "'Playball'", 'Alex Brush': "'Alex Brush'", 'Parisienne': "'Parisienne'", 'Pinyon Script': "'Pinyon Script'" };
+  applyFont() { document.documentElement.style.setProperty('--script', this.fonts[this.props.fuente] || "'Great Vibes'"); }
   componentDidMount() {
+    this.applyFont();
     this.timer = setInterval(() => this.setState({ now: Date.now() }), 1000);
     this.setupReveal();
   }
@@ -390,6 +400,7 @@ class Component extends DCLogic {
     document.body.style.overflow = '';
   }
   componentDidUpdate() {
+    this.applyFont();
     const lock = this.state.lb >= 0 || this.state.rsvp || (this.showIntro() && this.state.stage !== 'gone');
     document.body.style.overflow = lock ? 'hidden' : '';
   }
@@ -453,10 +464,10 @@ class Component extends DCLogic {
     const { rName, attend, guests, rMsg } = this.state;
     if (!rName.trim()) { this.setState({ tried: true }); return; }
     const txt = attend === 'si'
-      ? `Hola, soy ${rName.trim()}. Confirmo mi asistencia a la boda de David & Cleny (${guests} persona${guests > 1 ? 's' : ''}).`
+      ? `Hola, soy ${rName.trim()}. Confirmo mi asistencia a la boda de David & Cleny.`
       : `Hola, soy ${rName.trim()}. Lamentablemente no podré asistir a la boda de David & Cleny.`;
     const full = txt + (rMsg.trim() ? `\n\n${rMsg.trim()}` : '');
-    let num = String(this.props.whatsapp ?? '').replace(/\D/g, '');
+    let num = String(this.props.whatsapp || '51931183132').replace(/\D/g, '');
     if (num.length === 9) num = '51' + num;
     window.open(`https://wa.me/${num}?text=${encodeURIComponent(full)}`, '_blank');
     this.setState({ rsvp: false });
@@ -494,6 +505,7 @@ class Component extends DCLogic {
     return {
       rootRef: this.rootRef, carRef: this.carRef, thumbRef: this.thumbRef,
       showOverlay: this.showIntro() && st.stage !== 'gone',
+      heartsEl: (this.props.showHearts ?? true) && (!this.showIntro() || st.stage !== 'closed') ? (this._hn || (this._hn = this.heartsNode())) : null,
       openEnvelope: this.openEnvelope,
       ovOpacity: st.stage === 'fading' ? 0 : 1,
       flapTransform: closed ? 'rotateX(0deg)' : 'rotateX(180deg)',
@@ -547,45 +559,6 @@ class Component extends DCLogic {
     };
   }
 }
-</script>
-<!-- Lluvia de corazones -->
-<style>
-#hearts-rain{position:fixed;inset:0;pointer-events:none;z-index:60;overflow:hidden}
-#hearts-rain .h{position:absolute;top:-40px;line-height:1;will-change:transform,opacity;animation:hFall linear forwards}
-#hearts-rain .h span{display:inline-block;animation:hSway ease-in-out infinite alternate}
-@keyframes hFall{0%{transform:translateY(0) rotate(0);opacity:0}8%{opacity:var(--o)}85%{opacity:var(--o)}100%{transform:translateY(calc(100vh + 60px)) rotate(var(--r));opacity:0}}
-@keyframes hSway{from{transform:translateX(calc(var(--s) * -1))}to{transform:translateX(var(--s))}}
-</style>
-<script>
-(function(){
-  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var box = document.createElement('div'); box.id = 'hearts-rain'; document.body.appendChild(box);
-  var colors = ['#e8a0a8','#d97a88','#b8955a','#d9bd86','#f3c6cc','#a8323f'];
-  var glyphs = ['♥','❤︎','♡'];
-  function heart(){
-    var h = document.createElement('div'); h.className = 'h';
-    var size = 10 + Math.random()*16, dur = 6 + Math.random()*6;
-    h.style.left = (Math.random()*100) + 'vw';
-    h.style.fontSize = size + 'px';
-    h.style.color = colors[Math.floor(Math.random()*colors.length)];
-    h.style.animationDuration = dur + 's';
-    h.style.setProperty('--o', (0.55 + Math.random()*0.4).toFixed(2));
-    h.style.setProperty('--r', (Math.random()*120-60).toFixed(0) + 'deg');
-    var s = document.createElement('span');
-    s.textContent = glyphs[Math.floor(Math.random()*glyphs.length)];
-    s.style.setProperty('--s', (8 + Math.random()*18).toFixed(0) + 'px');
-    s.style.animationDuration = (1.5 + Math.random()*2) + 's';
-    h.appendChild(s); box.appendChild(h);
-    setTimeout(function(){ h.remove(); }, dur*1000 + 200);
-  }
-  // lluvia suave y constante
-  setInterval(function(){ if (!document.hidden && box.childElementCount < 28) heart(); }, 650);
-  // ráfaga al abrir el sobre (primer toque)
-  document.addEventListener('click', function burst(){
-    for (var i = 0; i < 26; i++) setTimeout(heart, i*70);
-    document.removeEventListener('click', burst);
-  });
-})();
 </script>
 </body>
 </html>
